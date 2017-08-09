@@ -543,7 +543,7 @@ int main(int argc, const char * argv[]) {
     @autoreleasepool {
         Location *loc1 = [Location alloc];
         //Location *loc2 = [[Location alloc] init];
-        //[Location sayHello];
+        [Location sayHello];
         
         loc1.location_number=@10;
         

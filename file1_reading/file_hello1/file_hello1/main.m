@@ -426,15 +426,26 @@ NSMutableArray *tab_exits = [[NSMutableArray alloc] init];
 
 -(NSString *)WaitForCommand
 {
-    //char tab[80];
-    //sscanf("%s",tab);
-    //printf(" printing %s",tab);
-    //NSString *UserWord = [ [NSString alloc] initWithCString:tab encoding:typeUTF8Text];
+    NSString *command = [[[NSString alloc] initWithData:[[NSFileHandle fileHandleWithStandardInput] availableData] encoding:NSASCIIStringEncoding] stringByTrimmingCharactersInSet:[NSCharacterSet newlineCharacterSet] ];
+    
+    NSLog(@"%@",command);
     
     
-    return [[[NSString alloc] initWithData:[[NSFileHandle fileHandleWithStandardInput] availableData] encoding:NSASCIIStringEncoding] stringByTrimmingCharactersInSet:[NSCharacterSet newlineCharacterSet]];
-
-    //return UserWord;
+    //if there are space between letters then remove them
+    
+    
+    if ([command containsString:@" "])
+    {
+        command = [command stringByReplacingOccurrencesOfString:@" " withString:@""];
+    }
+    
+    
+    //NSLog(command);
+    
+    
+    
+//    return [[[NSString alloc] initWithData:[[NSFileHandle fileHandleWithStandardInput] availableData] encoding:NSASCIIStringEncoding] stringByTrimmingCharactersInSet:[NSCharacterSet newlineCharacterSet]];
+    return command;
     
 }
 
@@ -457,8 +468,7 @@ NSMutableArray *tab_exits = [[NSMutableArray alloc] init];
             //[tarray ]
             NSLog(@"exit possible : %@",[tarray objectAtIndex:TAB_NR_DESTINATION]);
             _location_number = nr;
-            [self ShowDescription];
-            [self findExits:_location_number];
+            
             marker_IcanGO =TRUE;
             break;
         }
@@ -489,24 +499,24 @@ NSMutableArray *tab_exits = [[NSMutableArray alloc] init];
     for( NSMutableArray *row1 in exitCommand_tab)
     {
         //NSLog(@"%@",row1);
-        for(NSString *compareWord in row1)
+        for(NSString *DefinedWord in row1)
         {
-            //NSLog(@"%@ to == %@",compareWord, wordFromUser);
-            if  ( [compareWord isKindOfClass:[NSString class] ] )
+            //NSLog(@"%@ to == %@",DefinedWord, wordFromUser);
+            if  ( [DefinedWord isKindOfClass:[NSString class] ] )
             {
-                if ( NSOrderedSame == [compareWord caseInsensitiveCompare:wordFromUser])
+                if ( NSOrderedSame == [DefinedWord caseInsensitiveCompare:wordFromUser])
                 {
-                    NSLog(@"%@ to == %@",compareWord, wordFromUser);
+                    NSLog(@"%@ to == %@",DefinedWord, wordFromUser);
                     NSLog(@" going %@ ",[row1 objectAtIndex:0]);
                     (void)[self MoveToLocationIfThisIsPossible:[row1 objectAtIndex:0]];
                     return;
                 }
                 //but it can be longer
-                if ( [ wordFromUser localizedCaseInsensitiveContainsString:compareWord])
+                if ( [ wordFromUser localizedCaseInsensitiveContainsString:DefinedWord])
                 {
-                    NSLog(@"%@ to == %@",compareWord, wordFromUser);
+                    NSLog(@"%@ to == %@",DefinedWord, wordFromUser);
                     //check whether this word is in the beginning
-                    loc =[wordFromUser rangeOfString:compareWord options:NSCaseInsensitiveSearch].location;
+                    loc =[wordFromUser rangeOfString:DefinedWord options:NSCaseInsensitiveSearch].location;
                     //loc = [wordFromUser r]
                     //NSLog(@"%lu",(unsigned long)
                     if (0 == loc)
@@ -612,7 +622,7 @@ int main(int argc, const char * argv[]) {
                 [loc1 ShowDescription];
             }
 
-            else if ([word containsString:@"go"])
+            else if ([word containsString:@"go "])
             {
                 mainScanner = [NSScanner scannerWithString:word  ];
                 
@@ -647,6 +657,8 @@ int main(int argc, const char * argv[]) {
             else
             {
                 [loc1 AnalyzeCommandFromUser:word   tab_of_all_commandsForOut:mutableArrayExits];
+                
+                [loc1 ShowDescription];
                 mutableArrayExits = [loc1 findExits:loc1.location_number];
             }
 

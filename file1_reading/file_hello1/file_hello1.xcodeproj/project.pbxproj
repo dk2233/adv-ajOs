@@ -25,6 +25,7 @@
 /* Begin PBXFileReference section */
 		6523DF0A1F07BCD60082E6A9 /* file_hello1 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = file_hello1; sourceTree = BUILT_PRODUCTS_DIR; };
 		6523DF0D1F07BCD60082E6A9 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		652B86941F3E2DDC00EF4316 /* Adventure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Adventure.h; path = file_hello1/Adventure.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -41,6 +42,7 @@
 		6523DF011F07BCD60082E6A9 = {
 			isa = PBXGroup;
 			children = (
+				652B86941F3E2DDC00EF4316 /* Adventure.h */,
 				6523DF0C1F07BCD60082E6A9 /* file_hello1 */,
 				6523DF0B1F07BCD60082E6A9 /* Products */,
 			);

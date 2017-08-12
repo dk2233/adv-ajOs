@@ -10,17 +10,13 @@
 //#import <Foundation/Foundation.h>
 //#import <Foundation/NSFileHandle.h>
 //#import <Foundation/NSScanner.h>
-#include "stdio.h"
-
+#include "stdlib.h"
+#import "Adventure.h"
 
 NSString *fileName;
 NSNumber *nr_of_treasure;
 NSNumber *nr;
 
-
-#define  EXITS_NUMBER_IN_FILES              @"3"
-#define  DESTINATION_NUMBER_IN_FILES        1U
-#define  TAB_NR_DESTINATION                 1U
 
 /*
  this classs is for 
@@ -38,44 +34,10 @@ NSNumber *nr;
 
 
 
-
-@interface Location : NSObject
-//actual location number
-@property NSNumber *location_number;
-//all exits for location number
-@property NSMutableArray *AllExits;
-//all data exit for location number
-@property NSMutableArray *DataForExits;
-//all data from file
-@property NSString *AllData;
-//table with all commands that are for exit number
-@property NSMutableArray *AllExitCommands;
-//all exits
-@property NSMutableArray *AllExitsTable;
-
-
-+(void)initialize;
-+(void)sayHello;
--(NSNumber *)addTwoValues:(uint16_t)val1 withNumber:(uint16_t)val2;
--(void)WriteOtherWord;
-
--(id)init;
-
--(NSMutableArray *)findExits:(NSNumber *)locNumberToFindExits;
-
--(void)findAllExitTable;
--(void)findAllCommandsTable;
-
-
--(void)ShowDescription;
-
--(void)ShowAllData;
--(NSString *)WaitForCommand;
--(BOOL)MoveToLocationIfThisIsPossible:(NSNumber*)nr;
--(void)ShowAllExitData;
--(void)AnalyzeCommandFromUser:(NSString *)word  tab_of_all_commandsForOut:(NSMutableArray *)exitCommand_tab;
--(NSMutableArray *)CheckAllExitsCommandForLocation;
-@end
+#define  EXITS_NUMBER_IN_FILES              @"3"
+#define  ITEMS_LOCATION_IN_DATA_FILE        @"7"
+#define  DESTINATION_NUMBER_IN_FILES        1U
+#define  TAB_NR_DESTINATION                 1U
 
 
 
@@ -222,8 +184,10 @@ NSNumber *nr;
     NSScanner *scannerExits, *oneLineScanner;
     scannerExits = [NSScanner scannerWithString:_AllData];
     self.AllExitCommands = [ [NSMutableArray alloc]init ];
+    self.AllItems = [ [NSMutableArray alloc]init ];
     NSString *oneLine;
     NSInteger temp=0U;
+    NSInteger value=0U;
     NSString  *temp_string;
     NSCharacterSet *letters = [NSCharacterSet letterCharacterSet];
     uint8_t stateOfSearching = 0;
@@ -263,6 +227,21 @@ NSNumber *nr;
                         
                         
                     }
+                    else if (1 == (temp / 1000))
+                    {
+                        value = temp /1000 ;
+                        
+                        if ([[_AllItems.lastObject objectAtIndex:0U] isNotEqualTo: [NSNumber numberWithInteger:value]])
+                        {
+                            [_AllItems addObject:[[NSMutableArray alloc] init]];
+                            [_AllItems.lastObject addObject:[NSNumber numberWithInteger:value]];
+                        }
+                        
+                        [_AllItems.lastObject addObject:temp_string];
+                        
+                        [oneLineScanner scanUpToString:@"\n" intoString:NULL];
+                        
+                    }
                     else
                     {
                         stateOfSearching = 1;
@@ -280,7 +259,10 @@ NSNumber *nr;
     
 }
 
+-(void)findAllItemStartLocation
+{
     
+}
     
     
 
@@ -339,13 +321,13 @@ NSNumber *nr;
     _DataForExits=[[NSMutableArray alloc] init];
     
     NSMutableArray *OneRowOfTab=[[NSMutableArray alloc] init];
-
+    
     NSMutableArray *OneRowOfTab_2=[[NSMutableArray alloc] init];
-NSMutableArray *tab_exits = [[NSMutableArray alloc] init];
+    NSMutableArray *tab_exits = [[NSMutableArray alloc] init];
     _AllExits = [ [NSMutableArray alloc] init ];
     
     //NSLog(@"  exits for %@ ",locNumberToFindExits );
-  
+    
     NSInteger nr_searched = [locNumberToFindExits integerValue];
     NSInteger temp;
     
@@ -426,6 +408,8 @@ NSMutableArray *tab_exits = [[NSMutableArray alloc] init];
 
 -(NSString *)WaitForCommand
 {
+    
+    fprintf(stderr,  ">");
     NSString *command = [[[NSString alloc] initWithData:[[NSFileHandle fileHandleWithStandardInput] availableData] encoding:NSASCIIStringEncoding] stringByTrimmingCharactersInSet:[NSCharacterSet newlineCharacterSet] ];
     
     NSLog(@"%@",command);
@@ -455,7 +439,11 @@ NSMutableArray *tab_exits = [[NSMutableArray alloc] init];
     //it was used previously to check whether I can go from current location
     //NSArray *tab_a=[loc1 findExits:loc1.location_number];
     NSArray *tarray;
-    //NSLog(@"%@",_DataForExits);
+    //value of N number if
+    NSNumber *number_N;
+    NSNumber *number_M;
+    NSInteger varN;
+    NSInteger varM;
     if (nr == _location_number)
     {
         NSLog(@" You are already there  %@  to %@",_location_number,nr);
@@ -463,15 +451,59 @@ NSMutableArray *tab_exits = [[NSMutableArray alloc] init];
     }
     for(tarray in _DataForExits)
     {
-        if ([nr isEqual:[tarray objectAtIndex:TAB_NR_DESTINATION]])
+        number_N = [tarray objectAtIndex:TAB_NR_DESTINATION];
+        varN =  [number_N integerValue] %1000  ;
+        number_N = [NSNumber numberWithInteger:varN];
+        
+        number_M = [tarray objectAtIndex:TAB_NR_DESTINATION];
+        varM =  [number_M integerValue]/1000  ;
+        number_M = [NSNumber numberWithInteger:varM];
+        
+        
+        /*		IF N<=300	IT IS THE LOCATION TO GO TO.
+        *		IF 300<N<=500	N-300 IS USED IN A COMPUTED GOTO TO
+        *					A SECTION OF SPECIAL CODE.
+        *		IF N>500	MESSAGE N-500 FROM SECTION 6 IS PRINTED,
+        *					AND HE STAYS WHEREVER HE IS.
+         */
+        //NSLog(@" nr = %@ and numberN %@ ",nr, number_N);
+        if  ([nr isEqual:[tarray objectAtIndex:TAB_NR_DESTINATION]])
+            //&&
         {
-            //[tarray ]
-            NSLog(@"exit possible : %@",[tarray objectAtIndex:TAB_NR_DESTINATION]);
-            _location_number = nr;
+            NSLog(@" number M %@ number N %@",number_M, number_N);
+
+            if ( (varN<=300) && (0 == varM) )
+            {
+                NSLog(@"exit possible : %@",number_N);
             
-            marker_IcanGO =TRUE;
-            break;
+            
+                _location_number = nr;
+            
+                marker_IcanGO =TRUE;
+                break;
+            }
+            else if ((varM >0 ) && (varM<100))
+            {
+                
+                NSLog(@" i can go with probablity %ld ",(long)varM);
+                uint32_t rand_u32 = arc4random_uniform(100U);
+                if (rand_u32 < varM)
+                {
+                    _location_number = nr;
+                    
+                    marker_IcanGO =TRUE;
+                    break;
+
+                }
+                else
+                {
+                    NSLog(@"probability was %d %%",rand_u32);
+                }
+                
+            }
+            
         }
+        //else if
         else
         {
             //NSLog(@"not equal %@ =! %@",loc_nr,[tarray objectAtIndex:TAB_NO_DESTINATION]);
@@ -512,8 +544,10 @@ NSMutableArray *tab_exits = [[NSMutableArray alloc] init];
                     return;
                 }
                 //but it can be longer
-                if ( [ wordFromUser localizedCaseInsensitiveContainsString:DefinedWord])
+                if ( ( [ wordFromUser localizedCaseInsensitiveContainsString:DefinedWord]) &&
+                    (DefinedWord.length >1U ) )
                 {
+                    NSLog(@"%ld", (long)DefinedWord.length);
                     NSLog(@"%@ to == %@",DefinedWord, wordFromUser);
                     //check whether this word is in the beginning
                     loc =[wordFromUser rangeOfString:DefinedWord options:NSCaseInsensitiveSearch].location;
@@ -609,6 +643,7 @@ int main(int argc, const char * argv[]) {
         {
             
             //[loc1 findExits];
+            //printf(">");
             word = [loc1 WaitForCommand];
             //NSLog(@"new => %@",word);
             

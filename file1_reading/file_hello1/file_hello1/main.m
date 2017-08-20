@@ -51,18 +51,6 @@ NSNumber *nr;
 
 @implementation Location
 
-+(void)initialize
-{
-    
-    nr_of_treasure=@0;
-//    _location_number = @0;
-}
-+(void)sayHello
-{
-    NSLog(@"\n\n\n shtg to say \n\n");
-};
-
-
 -(id)init
 {
     //NSNumber *internal = RESET;
@@ -73,14 +61,6 @@ NSNumber *nr;
     self.AllExitCommands = [[NSMutableArray alloc]init];
     return self;
 }
-
--(NSNumber *)addTwoValues:(uint16_t)val1 withNumber:(uint16_t)val2
-{
-    NSNumber *ret = [NSNumber numberWithInt:(val1+val2)];
-    NSLog(@"methods adding %@",ret);
-    return ret;
-}
-
 
 -(void)ShowDescription
 {
@@ -769,9 +749,7 @@ int main(int argc, const char * argv[]) {
     
     @autoreleasepool {
         Location *loc1 = [Location alloc];
-        //Location *loc2 = [[Location alloc] init];
-        [Location sayHello];
-        
+                
         loc1.location_number=@10;
         
         

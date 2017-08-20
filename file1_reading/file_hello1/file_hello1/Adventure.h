@@ -30,7 +30,7 @@
 
 @property NSMutableArray *AllItems;
 @property NSMutableArray *AllItemsLocation;
-
+@property NSMutableArray  *AllItemMessage;
 +(void)initialize;
 +(void)sayHello;
 -(NSNumber *)addTwoValues:(uint16_t)val1 withNumber:(uint16_t)val2;
@@ -43,6 +43,10 @@
 -(void)findAllExitTable;
 -(void)findAllCommandsTable;
 -(void)findAllItemStartLocation;
+-(void)findAllItemMessage;
+
+
+-(void)findThisItemMessage:(NSNumber *)ItemNumber;
 
 -(void)ShowDescription;
 
@@ -54,6 +58,19 @@
 -(NSMutableArray *)CheckAllExitsCommandForLocation;
 @end
 
+
+
+/////////////////////////////////////////////////////////////////
+// Exported   symbol defintions
+/////////////////////////////////////////////////////////////////
+#define  EXITS_NUMBER_IN_FILES                  @"3"
+#define  VOCABULARY_LOCATION_IN_FILES           @"4"
+#define  ITEMS_LOCATION_IN_DATA_FILE            @"7"
+#define  ITEMS_MESSAGES_IN_DATA_FILE            @"5"
+
+#define  DESTINATION_NUMBER_IN_FILES        1U
+#define  TAB_NR_DESTINATION                 1U
+#define  RESET                              0U
 
 
 

@@ -55,10 +55,10 @@ NSNumber *nr;
 {
     //NSNumber *internal = RESET;
     _location_number = RESET;
-    _DataForExits=[[NSMutableArray alloc] init];
-    _AllExits=[[NSMutableArray alloc] init];
+    _DataForExitsForLocation=[[NSMutableArray alloc] init];
+    //_AllExitsForLocation=[[NSMutableArray alloc] init];
     
-    self.AllExitCommands = [[NSMutableArray alloc]init];
+    //self.AllExitCommands = [[NSMutableArray alloc]init];
     return self;
 }
 
@@ -72,7 +72,7 @@ NSNumber *nr;
     int8_t a=0;
     boolean_t isFound = false;
     //NSLog(@" I am searing for %d ",(int)nr_searched);
-    theScanner = [NSScanner scannerWithString:_AllData ];
+    theScanner = [NSScanner scannerWithString:AllDataFromFile ];
     NSScanner *minorScanner;
     
 
@@ -125,7 +125,7 @@ NSNumber *nr;
     */
     
     a=1U;
-    for( NSMutableArray *array in self.AllItemsLocation)
+    for( NSMutableArray *array in AllItemsLocation)
     {
         //NSLog(@"%@",array);
         for(uint8_t i=1U; i<array.count ; i++)
@@ -133,7 +133,6 @@ NSNumber *nr;
             if ([self.location_number isEqual:[array objectAtIndex:i ] ])
             {
                 //NSLog(@"%@ object nr %ld",array,a);
-                //NSLog(@"%@",[[_AllItems objectAtIndex:a] objectAtIndex:0U]);
                 [self findThisItemMessage:[NSNumber numberWithInteger:a]];
                 //isFound = true;
                 //break;
@@ -153,12 +152,12 @@ NSNumber *nr;
 -(void)findThisItemMessage:(NSNumber *)ItemNumber
 {
     NSUInteger iter=0U;
-    for(NSMutableArray *One_row in self.AllItemMessage)
+    for(NSMutableArray *One_row in AllItemMessage)
     {
         //NSLog(@" %@ ",[One_row objectAtIndex:0U]);
         if ([[One_row objectAtIndex:0U] isEqual:ItemNumber] )
         {
-            NSLog(@"%@",[[self.AllItemMessage objectAtIndex:iter] objectAtIndex:1U]);
+            NSLog(@"%@",[[AllItemMessage objectAtIndex:iter] objectAtIndex:1U]);
         }
         iter++;
     }
@@ -170,7 +169,7 @@ NSNumber *nr;
 {
     NSArray *tarray;
     
-    for(tarray in _DataForExits)
+    for(tarray in _DataForExitsForLocation)
     {
         NSString *exits_string = @" " ;
         exits_string = [exits_string stringByAppendingString:@" all exit are: "];
@@ -191,7 +190,7 @@ NSNumber *nr;
 //(NSArray *)data
 {
     
-    for(NSMutableArray *line in self.AllItemMessage )
+    for(NSMutableArray *line in AllItemMessage )
     {
         NSLog(@"%@",[line objectAtIndex:0U]);
     }
@@ -203,8 +202,8 @@ NSNumber *nr;
 -(void)findAllItemMessage
 {
     NSScanner *scanner, *oneLineScanner;
-    scanner = [NSScanner scannerWithString:_AllData];
-    self.AllItemMessage = [ [NSMutableArray alloc]init ];
+    scanner = [NSScanner scannerWithString:AllDataFromFile];
+    AllItemMessage = [ [NSMutableArray alloc]init ];
     //self.AllItems = [ [NSMutableArray alloc]init ];
     
     NSString *oneLine;
@@ -243,15 +242,15 @@ NSNumber *nr;
                 //{
                     /* if there is a new object found I have to initialize new NSMutableArray
                      */
-                [self.AllItemMessage addObject:[[ NSMutableArray alloc] init]];
+                [AllItemMessage addObject:[[ NSMutableArray alloc] init]];
                 //}
                 
                 //NSLog(@"%@",oneLine);
                 
                 [oneLineScanner scanUpToString:@"\n" intoString:&message];
                 
-                [self.AllItemMessage.lastObject addObject:[NSNumber numberWithInteger:temp]];
-                [self.AllItemMessage.lastObject addObject:message];
+                [AllItemMessage.lastObject addObject:[NSNumber numberWithInteger:temp]];
+                [AllItemMessage.lastObject addObject:message];
                 
                 
                 //NSLog(@"number = %ld with \n %@",temp,message);
@@ -283,9 +282,9 @@ NSNumber *nr;
 -(void)findAllCommandsTable
 {
     NSScanner *scannerExits, *oneLineScanner;
-    scannerExits = [NSScanner scannerWithString:_AllData];
-    self.AllExitCommands = [ [NSMutableArray alloc]init ];
-    self.AllItems = [ [NSMutableArray alloc]init ];
+    scannerExits = [NSScanner scannerWithString:AllDataFromFile];
+    AllExitCommands = [ [NSMutableArray alloc]init ];
+    AllItems = [ [NSMutableArray alloc]init ];
     
     NSString *oneLine;
     NSInteger temp=0U;
@@ -323,9 +322,9 @@ NSNumber *nr;
                     [oneLineScanner scanCharactersFromSet:letters intoString:&temp_string];
                     if (0 ==  (temp / 1000))
                     {
-                        [_AllExitCommands addObject:[[NSMutableArray alloc]init]];
-                        [_AllExitCommands.lastObject addObject:[NSNumber numberWithInteger:temp]];
-                        [_AllExitCommands.lastObject addObject:temp_string];
+                        [AllExitCommands addObject:[[NSMutableArray alloc]init]];
+                        [AllExitCommands.lastObject addObject:[NSNumber numberWithInteger:temp]];
+                        [AllExitCommands.lastObject addObject:temp_string];
                         [oneLineScanner scanUpToString:@"\n" intoString:NULL];
                         
                         
@@ -336,20 +335,20 @@ NSNumber *nr;
                         //NSLog(@"%@",oneLine);
                         
                         
-                        if ([_AllItems.lastObject count] > 0U)
+                        if ([AllItems.lastObject count] > 0U)
                         {
                             //if ([[_AllItems.lastObject objectAtIndex:0U] isNotEqualTo: [NSNumber numberWithInteger:value]])
                             if ( number_of_item_previous != temp)
                             {
-                                [_AllItems addObject:[[NSMutableArray alloc] init]];
+                                [AllItems addObject:[[NSMutableArray alloc] init]];
                                 //[_AllItems.lastObject addObject:[NSNumber numberWithInteger:value]];
                             }
-                            [_AllItems.lastObject addObject:temp_string];
+                            [AllItems.lastObject addObject:temp_string];
                         }
                         else
                         {
-                            [self.AllItems addObject:[[NSMutableArray alloc] init]];
-                            [_AllItems.lastObject addObject:temp_string];
+                            [AllItems addObject:[[NSMutableArray alloc] init]];
+                            [AllItems.lastObject addObject:temp_string];
                         }
                         
                         
@@ -377,8 +376,8 @@ NSNumber *nr;
 -(void)findAllItemStartLocation
 {
     NSScanner *scannerItems, *oneLineScanner;
-    scannerItems = [NSScanner scannerWithString:_AllData];
-    self.AllItemsLocation = [ [NSMutableArray alloc]init ];
+    scannerItems = [NSScanner scannerWithString:AllDataFromFile];
+    AllItemsLocation = [ [NSMutableArray alloc]init ];
     
     
     NSString *oneLine;
@@ -408,15 +407,15 @@ NSNumber *nr;
                     break;
                 }
                 
-                [_AllItemsLocation  addObject:[[NSMutableArray alloc]init ] ];
+                [AllItemsLocation  addObject:[[NSMutableArray alloc]init ] ];
                 
                 while( ![oneLineScanner isAtEnd])
                 {
                 
                     [oneLineScanner scanInteger:&temp];
-                    [_AllItemsLocation.lastObject addObject:[NSNumber numberWithInteger:temp]];
+                    [AllItemsLocation.lastObject addObject:[NSNumber numberWithInteger:temp]];
                     
-                    temp = [ [_AllItemsLocation.lastObject objectAtIndex:0U] integerValue]-1;
+                    temp = [ [AllItemsLocation.lastObject objectAtIndex:0U] integerValue]-1;
                 }
                 //NSLog(@" item: %@ is at location %@",[[_AllItems objectAtIndex:temp] objectAtIndex:0U],
                  //     [_AllItemsLocation.lastObject objectAtIndex:1U]);
@@ -432,9 +431,9 @@ NSNumber *nr;
 -(void)findAllExitTable
 {
     NSScanner *scannerExits, *oneLineScanner;
-    scannerExits = [NSScanner scannerWithString:_AllData];
-    _AllExitsTable = [ [NSMutableArray alloc]init ];
-    _AllExitCommands= [ [NSMutableArray alloc]init ];
+    scannerExits = [NSScanner scannerWithString:AllDataFromFile];
+    AllExitsTable = [ [NSMutableArray alloc]init ];
+    AllExitCommands= [ [NSMutableArray alloc]init ];
     NSString *oneLine;
     NSInteger temp=0;
     //NSString *temp_string;
@@ -464,11 +463,11 @@ NSNumber *nr;
                 //oneLineScanner.scanLocation = 0U;
                 //NSLog(@"%@",oneLine);
                 //NSLog(@"%@",_AllExitsTable);
-                [_AllExitsTable addObject:[[NSMutableArray alloc]init]];
+                [AllExitsTable addObject:[[NSMutableArray alloc]init]];
                 while(![oneLineScanner isAtEnd])
                 {
                     [oneLineScanner scanInteger:&temp];
-                    [_AllExitsTable.lastObject addObject:[NSNumber numberWithInteger:temp]];
+                    [AllExitsTable.lastObject addObject:[NSNumber numberWithInteger:temp]];
                 }
                 
             }
@@ -481,13 +480,13 @@ NSNumber *nr;
 
 -(NSMutableArray *)findExits:(NSNumber *)locNumberToFindExits
 {
-    _DataForExits=[[NSMutableArray alloc] init];
+    self.DataForExitsForLocation=[[NSMutableArray alloc] init];
     
     NSMutableArray *OneRowOfTab=[[NSMutableArray alloc] init];
     
     NSMutableArray *OneRowOfTab_2=[[NSMutableArray alloc] init];
     NSMutableArray *tab_exits = [[NSMutableArray alloc] init];
-    _AllExits = [ [NSMutableArray alloc] init ];
+    AllExitsForLocation = [ [NSMutableArray alloc] init ];
     
     //NSLog(@"  exits for %@ ",locNumberToFindExits );
     
@@ -497,7 +496,7 @@ NSNumber *nr;
     NSNumber *temp_nsn;
     NSString *temp_string;
     //NSLog(@"%@",_AllExitCommands);
-    for(NSMutableArray *oneArray in self.AllExitsTable)
+    for(NSMutableArray *oneArray in AllExitsTable)
     {
         temp_nsn =(NSNumber *)[oneArray objectAtIndex:0];
      
@@ -509,13 +508,13 @@ NSNumber *nr;
             //If I have found searched number of location in exit line
             OneRowOfTab=[[NSMutableArray alloc] init];
             OneRowOfTab_2 = [[NSMutableArray alloc] init];
-            [_DataForExits addObject:OneRowOfTab];
+            [self.DataForExitsForLocation addObject:OneRowOfTab];
             [tab_exits addObject:OneRowOfTab_2];
             
             for(uint8_t i=0; i<oneArray.count; i++)
             {
                 temp_nsn =(NSNumber *)[oneArray objectAtIndex:i];
-                [_DataForExits.lastObject addObject:temp_nsn ];
+                [self.DataForExitsForLocation.lastObject addObject:temp_nsn ];
             
                 
                 if ( DESTINATION_NUMBER_IN_FILES == i)
@@ -524,7 +523,7 @@ NSNumber *nr;
                 }
                 else if ( i> DESTINATION_NUMBER_IN_FILES )
                 {
-                    for( NSMutableArray *rowArray in _AllExitCommands)
+                    for( NSMutableArray *rowArray in AllExitCommands)
                     {
                         //NSLog(@"%@",rowArray[0]);
                         if ([rowArray containsObject:temp_nsn])
@@ -539,14 +538,14 @@ NSNumber *nr;
                 }
             }
             
-           [_AllExits addObject:[_DataForExits.lastObject objectAtIndex:TAB_NR_DESTINATION]];
+           [AllExits addObject:[_DataForExits.lastObject objectAtIndex:TAB_NR_DESTINATION]];
         }
     }
     NSString *exits_string = @" " ;
     exits_string = [exits_string stringByAppendingString:@" all exit are: "];
     NSNumber *i;
     
-    for( i in _AllExits)
+    for( i in _DataForExitsForLocation)
     {
         exits_string = [exits_string stringByAppendingString:[i stringValue] ];
         exits_string = [exits_string stringByAppendingString:@" "];
@@ -562,11 +561,8 @@ NSNumber *nr;
 };
 
 
--(void)WriteOtherWord
-{
-    NSLog(@"\n\n\n other words like HELL-O \n\n");
-    
-}
+
+
 
 
 -(NSString *)WaitForCommand
@@ -593,11 +589,19 @@ NSNumber *nr;
     
 //    return [[[NSString alloc] initWithData:[[NSFileHandle fileHandleWithStandardInput] availableData] encoding:NSASCIIStringEncoding] stringByTrimmingCharactersInSet:[NSCharacterSet newlineCharacterSet]];
     return command;
-    
 }
+
+
+
+
+
+
+
 
 -(BOOL)MoveToLocationIfThisIsPossible:(NSNumber*)nr
 {
+    
+    
     boolean_t marker_IcanGO=false;
     //it was used previously to check whether I can go from current location
     //NSArray *tab_a=[loc1 findExits:loc1.location_number];
@@ -612,7 +616,7 @@ NSNumber *nr;
         NSLog(@" You are already there  %@  to %@",_location_number,nr);
         return marker_IcanGO;
     }
-    for(tarray in _DataForExits)
+    for(tarray in self.DataForExitsForLocation)
     {
         number_N = [tarray objectAtIndex:TAB_NR_DESTINATION];
         varN =  [number_N integerValue] %1000  ;
@@ -680,6 +684,13 @@ NSNumber *nr;
     return marker_IcanGO;
 }
 
+
+
+
+
+
+
+
 -(NSMutableArray *)CheckAllExitsCommandForLocation
 {
     //This method is for extracting from table with exits
@@ -687,6 +698,12 @@ NSNumber *nr;
     
     return tab;
 }
+
+
+
+
+
+
 
 -(void)AnalyzeCommandFromUser:(NSString *)wordFromUser  tab_of_all_commandsForOut:(NSMutableArray *)exitCommand_tab
 {
@@ -731,12 +748,15 @@ NSNumber *nr;
     }
 }
 
-
 @end
 
 
 
-int main(int argc, const char * argv[]) {
+
+
+
+int main(int argc, const char * argv[])
+{
     NSInteger nr_int;
     int  var_i;
     NSString *str1;
@@ -747,9 +767,30 @@ int main(int argc, const char * argv[]) {
     //NSCharacterSet *empty = [NSCharacterSet characterSetWithCharactersInString:@" "];
     NSMutableArray  *mutableArrayExits;
     
+    
+    
+    
+    
+    
     @autoreleasepool {
+        /*
+        /REading all data in form of strings
+        */
+        
+        fileName = [NSString stringWithUTF8String:"adventure.text"];
+        NSString *searchedString =[NSString stringWithFormat:@"%s",argv[1]];
+        
+        AllDataFromFile =[NSString stringWithContentsOfFile:fileName
+                                               encoding:NSASCIIStringEncoding
+                                                  error:NULL];
+        
+        //AllDataFromFile =zStr;
+        /*
+         *
+         */
+        
         Location *loc1 = [Location alloc];
-                
+        
         loc1.location_number=@10;
         
         
@@ -761,19 +802,9 @@ int main(int argc, const char * argv[]) {
             return 0;
         }
         
-        fileName = [NSString stringWithUTF8String:"adventure.text"];
-        //NSLog(@" arg %@ ",  [NSString stringWithFormat:@"%s",argv[1]]);
-        //NSLog(@" arg 2 %@ ", fileName);
         
         
-        NSString *searchedString =[NSString stringWithFormat:@"%s",argv[1]];
-        NSScanner *theScanner;
         
-        NSString *zStr =[NSString stringWithContentsOfFile:fileName
-                                               encoding:NSASCIIStringEncoding
-                                                  error:NULL];
-        
-        loc1.AllData =zStr;
         [loc1 findAllExitTable];
         [loc1 findAllCommandsTable];
         [loc1 findAllItemStartLocation];

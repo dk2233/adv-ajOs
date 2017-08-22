@@ -11,26 +11,13 @@
 
 
 
-
-
-
 @interface Location : NSObject
 //actual location number
 @property NSNumber *location_number;
 //all exits for location number
-@property NSMutableArray *AllExits;
-//all data exit for location number
-@property NSMutableArray *DataForExits;
-//all data from file
-@property NSString *AllData;
-//table with all commands that are for exit number
-@property NSMutableArray *AllExitCommands;
-//all exits
-@property NSMutableArray *AllExitsTable;
+ //all data exit for location number
+@property NSMutableArray *DataForExitsForLocation;
 
-@property NSMutableArray *AllItems;
-@property NSMutableArray *AllItemsLocation;
-@property NSMutableArray  *AllItemMessage;
 -(id)init;
 
 -(NSMutableArray *)findExits:(NSNumber *)locNumberToFindExits;
@@ -66,6 +53,22 @@
 #define  DESTINATION_NUMBER_IN_FILES        1U
 #define  TAB_NR_DESTINATION                 1U
 #define  RESET                              0U
+
+
+/////////////////////////////////////////////////////////////////
+// Exported Tables
+/////////////////////////////////////////////////////////////////
+
+//all data from file
+extern NSString             *AllDataFromFile;
+
+//all exits
+extern NSMutableArray       *AllExitsTable;
+extern NSMutableArray       *AllItems;
+extern NSMutableArray       *AllItemsLocation;
+extern NSMutableArray       *AllItemMessage;
+//table with all commands that are for exit number
+extern NSMutableArray       *AllExitCommands;
 
 
 

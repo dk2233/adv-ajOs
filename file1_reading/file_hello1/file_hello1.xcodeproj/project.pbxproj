@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		65191BCC1F50CF00000CF1BE /* misc.c in Sources */ = {isa = PBXBuildFile; fileRef = 65191BCB1F50CF00000CF1BE /* misc.c */; };
+		65191BCE1F51DD3D000CF1BE /* Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = 65191BCD1F51DD3D000CF1BE /* Tools.m */; };
 		6523DF0E1F07BCD60082E6A9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6523DF0D1F07BCD60082E6A9 /* main.m */; };
 /* End PBXBuildFile section */
 
@@ -23,9 +25,15 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		65191BC51F50BB2D000CF1BE /* main.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = main.h; sourceTree = "<group>"; };
+		65191BC61F50BB41000CF1BE /* misc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = misc.h; sourceTree = "<group>"; };
+		65191BC71F50BC47000CF1BE /* funcs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = funcs.h; sourceTree = "<group>"; };
+		65191BC81F50BCCE000CF1BE /* share.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = share.h; sourceTree = "<group>"; };
+		65191BCB1F50CF00000CF1BE /* misc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = misc.c; sourceTree = "<group>"; };
+		65191BCD1F51DD3D000CF1BE /* Tools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Tools.m; sourceTree = "<group>"; };
 		6523DF0A1F07BCD60082E6A9 /* file_hello1 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = file_hello1; sourceTree = BUILT_PRODUCTS_DIR; };
 		6523DF0D1F07BCD60082E6A9 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		652B86941F3E2DDC00EF4316 /* Adventure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Adventure.h; path = file_hello1/Adventure.h; sourceTree = "<group>"; };
+		652B86941F3E2DDC00EF4316 /* Adventure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Adventure.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -42,7 +50,6 @@
 		6523DF011F07BCD60082E6A9 = {
 			isa = PBXGroup;
 			children = (
-				652B86941F3E2DDC00EF4316 /* Adventure.h */,
 				6523DF0C1F07BCD60082E6A9 /* file_hello1 */,
 				6523DF0B1F07BCD60082E6A9 /* Products */,
 			);
@@ -60,6 +67,13 @@
 			isa = PBXGroup;
 			children = (
 				6523DF0D1F07BCD60082E6A9 /* main.m */,
+				65191BCD1F51DD3D000CF1BE /* Tools.m */,
+				65191BCB1F50CF00000CF1BE /* misc.c */,
+				65191BC51F50BB2D000CF1BE /* main.h */,
+				65191BC61F50BB41000CF1BE /* misc.h */,
+				65191BC71F50BC47000CF1BE /* funcs.h */,
+				65191BC81F50BCCE000CF1BE /* share.h */,
+				652B86941F3E2DDC00EF4316 /* Adventure.h */,
 			);
 			path = file_hello1;
 			sourceTree = "<group>";
@@ -120,7 +134,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				65191BCE1F51DD3D000CF1BE /* Tools.m in Sources */,
 				6523DF0E1F07BCD60082E6A9 /* main.m in Sources */,
+				65191BCC1F50CF00000CF1BE /* misc.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -152,7 +168,7 @@
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_NO_COMMON_BLOCKS = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -167,6 +183,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				SCAN_ALL_SOURCE_FILES_FOR_INCLUDES = YES;
 				SDKROOT = macosx;
 			};
 			name = Debug;
@@ -195,7 +212,7 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_NO_COMMON_BLOCKS = NO;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -204,6 +221,8 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				ONLY_ACTIVE_ARCH = YES;
+				SCAN_ALL_SOURCE_FILES_FOR_INCLUDES = YES;
 				SDKROOT = macosx;
 			};
 			name = Release;

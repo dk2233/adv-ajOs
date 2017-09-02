@@ -26,10 +26,9 @@
 
 
 
-NSString *fileName;
-NSNumber *nr_of_treasure;
-NSNumber *nr;
-
+NSNumber            *nr_of_treasure;
+NSNumber            *nr;
+NSMutableArray      *AllExits;
 
 /*
  this classs is for 
@@ -69,13 +68,13 @@ NSNumber *nr;
 -(void)ShowDescription
 {
     NSInteger nr_searched = [_location_number integerValue];
-    //NSInteger nr_searched = [searchedString integerValue];
+    
     NSScanner *theScanner;
     NSString *str1;
     NSInteger nr_int;
     int8_t a=0;
     boolean_t isFound = false;
-    //NSLog(@" I am searing for %d ",(int)nr_searched);
+    NSLog(@" I am searing for %d ",(int)nr_searched);
     theScanner = [NSScanner scannerWithString:AllDataFromFile ];
     NSScanner *minorScanner;
     
@@ -407,7 +406,7 @@ int main(int argc, const char * argv[])
     
    
     NSMutableArray  *mutableArrayExits;
-    AllExitsTable = [ [NSMutableArray alloc]init ];
+    //AllExitsTable = [ [NSMutableArray alloc]init ];
     
     
     
@@ -418,12 +417,7 @@ int main(int argc, const char * argv[])
         /REading all data in form of strings
         */
         
-        fileName = [NSString stringWithUTF8String:"adventure.text"];
-        NSString *searchedString =[NSString stringWithFormat:@"%s",argv[1]];
         
-        AllDataFromFile =[NSString stringWithContentsOfFile:fileName
-                                               encoding:NSASCIIStringEncoding
-                                                  error:NULL];
         
         //AllDataFromFile =zStr;
         /*
@@ -443,18 +437,21 @@ int main(int argc, const char * argv[])
             return 0;
         }
         
+        NSString *searchedString =[NSString stringWithFormat:@"%s",argv[1]];
+        NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
+        f.numberStyle = NSNumberFormatterDecimalStyle;
         
+        //NSNumber *numb = [NSNumber value]
+        
+        //NSNumber *myNumber = [f numberFromString:@"42"];
+        loc1.location_number = [f numberFromString:searchedString];
+        [ToolsForLocation ReadDataFile];
         [ToolsForLocation findAllExitTable];
         [ToolsForLocation findAllCommandsTable];
         [ToolsForLocation findAllItemStartLocation];
         [ToolsForLocation findAllItemMessage];
         
         
-        //[loc1 ShowAllData];
-        NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
-        f.numberStyle = NSNumberFormatterDecimalStyle;
-        //NSNumber *myNumber = [f numberFromString:@"42"];
-        loc1.location_number = [f numberFromString:searchedString];
         
         [loc1 ShowDescription];
         mutableArrayExits = [loc1 findExits:loc1.location_number];

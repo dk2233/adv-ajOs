@@ -21,33 +21,19 @@
 /////////////////////////////////////////////////////////////////
 
 //all data from file
-NSString             *AllDataFromFile;
+extern NSString             *AllDataFromFile;
 //all exits
-NSMutableArray       *AllExitsTable;
-NSMutableArray       *AllItems;
-NSMutableArray       *AllItemsLocation;
-NSMutableArray       *AllItemMessage;
+extern NSMutableArray       *AllExitsTable;
+extern NSMutableArray       *AllItems;
+extern NSMutableArray       *AllItemsLocation;
+extern NSMutableArray       *AllItemMessage;
 //table with all commands that are for exit number
-NSMutableArray       *AllExitCommands;
-NSMutableArray       *AllExits;
+extern NSMutableArray       *AllExitCommands;
+extern NSMutableArray       *AllExits;
 
 
 
 
-
-@interface ToolsForLocation : NSObject
-
-+(void)findAllExitTable;
-+(void)findAllCommandsTable;
-+(void)findAllItemStartLocation;
-+(void)findAllItemMessage;
-+(NSString *)WaitForCommand;
-+(void)AnalyzeCommandFromUser:(NSString *)wordFromUser tab_of_all_commandsForOut:(NSMutableArray *)exitCommand_tab actual_location:(id)LocationActual;
-              //
-
-   //MovingMethodFromOtherClass:(SEL)WhenIWantMoving;
-
-@end
 
 
 
@@ -68,6 +54,23 @@ NSMutableArray       *AllExits;
 -(NSMutableArray *)CheckAllExitsCommandForLocation;
 
 @end
+
+
+
+@interface ToolsForLocation : NSObject
++(void)ReadDataFile;
++(void)findAllExitTable;
++(void)findAllCommandsTable;
++(void)findAllItemStartLocation;
++(void)findAllItemMessage;
++(NSString *)WaitForCommand;
++(void)AnalyzeCommandFromUser:(NSString *)wordFromUser tab_of_all_commandsForOut:(NSMutableArray *)exitCommand_tab actual_location:(Location *)LocationActual;
+//
+
+//MovingMethodFromOtherClass:(SEL)WhenIWantMoving;
+
+@end
+
 
 /////////////////////////////////////////////////////////////////
 // Exported   symbol defintions

@@ -9,7 +9,31 @@
 #import <Foundation/Foundation.h>
 #import "Adventure.h"
 
+NSString                *AllDataFromFile;
+NSMutableArray          *AllExitsTable ;
+NSMutableArray          *AllItems;
+NSMutableArray          *AllItemsLocation;
+NSMutableArray          *AllItemMessage;
+NSMutableArray          *AllExitCommands;
+
 @implementation ToolsForLocation
+
++(void)ReadDataFile
+{
+    
+    NSString *fileName;
+    fileName = [NSString stringWithUTF8String:"adventure.text"];
+    
+    
+    AllDataFromFile =[NSString stringWithContentsOfFile:fileName
+                                               encoding:NSASCIIStringEncoding
+                                                  error:NULL];
+
+
+
+}
+
+
 
 +(void)findAllItemMessage
 {
@@ -240,6 +264,7 @@
 
 +(void)findAllExitTable
 {
+    AllExitsTable = [[NSMutableArray alloc] init];
     NSScanner *scannerExits, *oneLineScanner;
     scannerExits = [NSScanner scannerWithString:AllDataFromFile];
     
@@ -272,7 +297,7 @@
                 }
                 //oneLineScanner.scanLocation = 0U;
                 //NSLog(@"%@",oneLine);
-                //NSLog(@"%@",_AllExitsTable);
+                //NSLog(@"%@",AllExitsTable);
                 [AllExitsTable addObject:[[NSMutableArray alloc]init]];
                 while(![oneLineScanner isAtEnd])
                 {
@@ -314,7 +339,7 @@
     return command;
 }
 
-+ (void) AnalyzeCommandFromUser:(NSString *)wordFromUser  tab_of_all_commandsForOut:(NSMutableArray *)exitCommand_tab actual_location:(id)LocationActual;
++ (void) AnalyzeCommandFromUser:(NSString *)wordFromUser  tab_of_all_commandsForOut:(NSMutableArray *)exitCommand_tab actual_location:(Location *)LocationActual;
 {
      //MovingMethodFromOtherClass:(SEL)WhenIWantMoving
               //

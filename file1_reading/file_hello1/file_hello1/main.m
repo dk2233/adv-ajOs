@@ -29,6 +29,7 @@
 NSNumber            *nr_of_treasure;
 NSNumber            *nr;
 NSMutableArray      *AllExits;
+NSUInteger          NumberOfLocation;
 
 /*
  this classs is for 
@@ -395,6 +396,7 @@ NSMutableArray      *AllExits;
 int main(int argc, const char * argv[])
 {
     NSInteger nr_int;
+    //NSInteger *Numb
     int  var_i;
     NSString *str1;
     
@@ -450,9 +452,10 @@ int main(int argc, const char * argv[])
         [ToolsForLocation findAllCommandsTable];
         [ToolsForLocation findAllItemStartLocation];
         [ToolsForLocation findAllItemMessage];
+        NumberOfLocation = [ToolsForLocation FindNumberOfLocation];
         
-        
-        
+        //NumberOfLocation = [AllExitsTable count];
+        NSLog(@"Number of location %lu",(unsigned long)NumberOfLocation);
         [loc1 ShowDescription];
         mutableArrayExits = [loc1 findExits:loc1.location_number];
         

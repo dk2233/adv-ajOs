@@ -30,7 +30,7 @@ extern NSMutableArray       *AllItemMessage;
 //table with all commands that are for exit number
 extern NSMutableArray       *AllExitCommands;
 extern NSMutableArray       *AllExits;
-
+extern NSUInteger           NumberOfLocation;
 
 
 
@@ -58,6 +58,8 @@ extern NSMutableArray       *AllExits;
 
 
 @interface ToolsForLocation : NSObject
+
++(NSUInteger)FindNumberOfLocation;
 +(void)ReadDataFile;
 +(void)findAllExitTable;
 +(void)findAllCommandsTable;
@@ -70,7 +72,6 @@ extern NSMutableArray       *AllExits;
 //MovingMethodFromOtherClass:(SEL)WhenIWantMoving;
 
 @end
-
 
 /////////////////////////////////////////////////////////////////
 // Exported   symbol defintions

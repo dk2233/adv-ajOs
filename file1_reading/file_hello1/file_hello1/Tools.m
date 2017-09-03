@@ -299,6 +299,7 @@ NSMutableArray          *AllExitCommands;
                 //NSLog(@"%@",oneLine);
                 //NSLog(@"%@",AllExitsTable);
                 [AllExitsTable addObject:[[NSMutableArray alloc]init]];
+                
                 while(![oneLineScanner isAtEnd])
                 {
                     [oneLineScanner scanInteger:&temp];
@@ -382,4 +383,30 @@ NSMutableArray          *AllExitCommands;
     }
 }
 
+
+
++(NSUInteger)FindNumberOfLocation
+{
+    NSUInteger number;
+    NSMutableArray *oneLine = AllExitsTable.lastObject;
+    number = [[oneLine objectAtIndex:0U] integerValue];
+    return(number);
+}
+
+
 @end
+
+
+
+
+
+
+//
+//@implementation <#class#>
+//
+//<#methods#>
+//
+//@end GlobalValuesForLocation:NSObject
+//@property NSNumber *NumberOfLocation;
+//
+//@end

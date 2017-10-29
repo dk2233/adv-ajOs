@@ -30,7 +30,6 @@ NSMutableArray          *AllExitCommands;
                                                   error:NULL];
 
 
-
 }
 
 
@@ -58,10 +57,8 @@ NSMutableArray          *AllExitCommands;
         {
             while(  RESET == stateOfSearching )
             {
-                
                 [scanner scanUpToString:@"\n" intoString:&oneLine ];
                 oneLineScanner = [NSScanner scannerWithString:oneLine];
-                
                 
                 //if ([oneLine containsString:@"-1"])
                 //[oneLine characterAtIndex:0U];
@@ -282,9 +279,6 @@ NSMutableArray          *AllExitCommands;
         if ( [scannerExits  scanString:EXITS_NUMBER_IN_FILES intoString:NULL ] )
         {
             
-            //[scannerExits scanUpToString:@"\n" intoString:NULL];
-            //uint8_t isItfound = 0;
-            
             while( 1 )
             {
                 
@@ -314,6 +308,10 @@ NSMutableArray          *AllExitCommands;
     
 }
 
+
+
+
+
 +(NSString *)WaitForCommand
 {
     
@@ -322,23 +320,17 @@ NSMutableArray          *AllExitCommands;
     
     NSLog(@"%@",command);
     
-    
     //if there are space between letters then remove them
-    
-    
     if ([command containsString:@" "])
     {
         command = [command stringByReplacingOccurrencesOfString:@" " withString:@""];
     }
-    
-    
-    //NSLog(command);
-    
-    
-    
-    //    return [[[NSString alloc] initWithData:[[NSFileHandle fileHandleWithStandardInput] availableData] encoding:NSASCIIStringEncoding] stringByTrimmingCharactersInSet:[NSCharacterSet newlineCharacterSet]];
+
     return command;
 }
+
+
+
 
 + (void) AnalyzeCommandFromUser:(NSString *)wordFromUser  tab_of_all_commandsForOut:(NSMutableArray *)exitCommand_tab actual_location:(Location *)LocationActual;
 {
@@ -392,6 +384,19 @@ NSMutableArray          *AllExitCommands;
     number = [[oneLine objectAtIndex:0U] integerValue];
     return(number);
 }
+
+
+
++(void)WriteMarkers: (NSUInteger)nr_of_symbols
+{
+    for(NSUInteger iter=0; iter < nr_of_symbols; iter++)
+    {
+        printf("*-*-");
+        fflush(stdout);
+    }
+    printf("\n");
+}
+
 
 
 @end

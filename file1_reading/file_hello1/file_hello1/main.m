@@ -384,10 +384,6 @@ NSUInteger          NumberOfLocation;
     return tab;
 }
 
-
-
-
-
 @end
 
 
@@ -410,16 +406,10 @@ int main(int argc, const char * argv[])
     NSMutableArray  *mutableArrayExits;
     //AllExitsTable = [ [NSMutableArray alloc]init ];
     
-    
-    
-    
-    
     @autoreleasepool {
         /*
         /REading all data in form of strings
         */
-        
-        
         
         //AllDataFromFile =zStr;
         /*
@@ -427,14 +417,15 @@ int main(int argc, const char * argv[])
          */
         
         Location *loc1 = [Location alloc];
-        
-        loc1.location_number=@10;
-        
-        
+        //loc1.location_number=@10;
+
         NSLog(@" arguments %d ",argc);
         
         if (argc<2)
         {
+            [ToolsForLocation WriteMarkers:NR_OF_MARKERS];
+            NSLog(@" You have to give an argument");
+            [ToolsForLocation WriteMarkers:NR_OF_MARKERS];
             //i have to exit
             return 0;
         }
@@ -456,6 +447,13 @@ int main(int argc, const char * argv[])
         
         //NumberOfLocation = [AllExitsTable count];
         NSLog(@"Number of location %lu",(unsigned long)NumberOfLocation);
+        //here i put a loop to create class instances for all location
+        
+        
+        
+        
+        
+        
         [loc1 ShowDescription];
         mutableArrayExits = [loc1 findExits:loc1.location_number];
         
@@ -471,7 +469,6 @@ int main(int argc, const char * argv[])
             //printf(">");
             word = [ToolsForLocation WaitForCommand];
             //NSLog(@"new => %@",word);
-            
             
             if ([word containsString:@"dupa"])
             {
@@ -503,7 +500,10 @@ int main(int argc, const char * argv[])
             {
                 [loc1 ShowAllExitData];
             }
-            
+            else if ([word containsString:@"help"])
+            {
+                printf("\n - exitcom \n - go <nr location> \n - exits \n - ");
+            }
             else if ([word containsString:@"exitcom"])
             {
                 mutableArrayExits = [loc1 findExits:loc1.location_number];
@@ -518,7 +518,7 @@ int main(int argc, const char * argv[])
             {
                 [ToolsForLocation AnalyzeCommandFromUser:word   tab_of_all_commandsForOut:mutableArrayExits actual_location:loc1];
                  
-                              //MovingMethodFromOtherClass:@selector(MoveToLocationIfThisIsPossible:loc_nr:)];
+                //MovingMethodFromOtherClass:@selector(MoveToLocationIfThisIsPossible:loc_nr:)];
                 
                 [loc1 ShowDescription];
                 mutableArrayExits = [loc1 findExits:loc1.location_number];

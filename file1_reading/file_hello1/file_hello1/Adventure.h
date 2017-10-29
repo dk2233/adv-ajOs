@@ -67,6 +67,8 @@ extern NSUInteger           NumberOfLocation;
 +(void)findAllItemMessage;
 +(NSString *)WaitForCommand;
 +(void)AnalyzeCommandFromUser:(NSString *)wordFromUser tab_of_all_commandsForOut:(NSMutableArray *)exitCommand_tab actual_location:(Location *)LocationActual;
+
++(void)WriteMarkers: (NSUInteger)nr_of_symbols;
 //
 
 //MovingMethodFromOtherClass:(SEL)WhenIWantMoving;
@@ -78,12 +80,14 @@ extern NSUInteger           NumberOfLocation;
 /////////////////////////////////////////////////////////////////
 #define  EXITS_NUMBER_IN_FILES                  @"3"
 #define  VOCABULARY_LOCATION_IN_FILES           @"4"
-#define  ITEMS_LOCATION_IN_DATA_FILE            @"7"
+
 #define  ITEMS_MESSAGES_IN_DATA_FILE            @"5"
+#define  ITEMS_LOCATION_IN_DATA_FILE            @"7"
+
 
 #define  DESTINATION_NUMBER_IN_FILES        1U
 #define  TAB_NR_DESTINATION                 1U
 #define  RESET                              0U
-
+#define  NR_OF_MARKERS                      30U
 
 #endif /* Adventure_h */

@@ -30,6 +30,7 @@ extern NSMutableArray       *AllItemMessage;
 //table with all commands that are for exit number
 extern NSMutableArray       *AllExitCommands;
 extern NSMutableArray       *AllExits;
+extern NSMutableArray       *AllLocationDescription;
 extern NSUInteger           NumberOfLocation;
 
 
@@ -46,9 +47,11 @@ extern NSUInteger           NumberOfLocation;
 -(NSMutableArray *)findExits:(NSNumber *)locNumberToFindExits;
 -(void)findThisItemMessage:(NSNumber *)ItemNumber;
 -(void)ShowDescription:(NSNumber *)loc_nr;
+-(void)ShowDescription;
 -(void)ShowAllData;
 -(BOOL)MoveToLocationIfThisIsPossible:(NSNumber*)nr;
--(void)ShowAllExitData: (NSMutableArray *)ExitsForLocation;
+-(void)ShowAllExitData;
+//: (NSMutableArray *)ExitsForLocation;
 -(NSMutableArray *)CheckAllExitsCommandForLocation;
 
 @end
@@ -57,10 +60,13 @@ extern NSUInteger           NumberOfLocation;
 
 @interface LocationItems: LocationFunctions
 
-@property NSNumber *location_number;
+//@property NSNumber *location_number;
 //all exits for location number
 //all data exit for location number
-@property NSMutableArray *DataForExitsForLocation;
+@property NSMutableArray *ExitsForLocation;
+@property NSString  *LocationDescription;
+@property NSMutableArray *LocationItems;
+@property NSMutableArray *Persons;
 
 //@property
 
@@ -71,6 +77,7 @@ extern NSUInteger           NumberOfLocation;
 
 @interface ToolsForLocation : NSObject
 
++(NSMutableArray *)findAllLocationDescription: (NSString *)BigStringData;
 +(NSUInteger)FindNumberOfLocation;
 +(void)ReadDataFile;
 +(void)findAllExitTable;

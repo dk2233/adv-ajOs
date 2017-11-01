@@ -28,6 +28,59 @@ NSMutableArray          *AllExitCommands;
                                                   error:NULL];
 }
 
++(NSMutableArray *)findAllLocationDescription: (NSString *)BigStringData
+{
+    NSMutableArray *array_descriptions = [[NSMutableArray alloc]init];
+    
+    //initialization of
+    [array_descriptions addObject:@""];
+     //[[NSString alloc]init]];
+    
+    NSString  *AllDescriptions = [[NSString alloc]init];
+    NSString *oneLine;
+    NSString *text_desc;
+    NSString *temp_string;
+    NSScanner *scanner, *oneLineScanner;
+    
+    NSInteger temp;
+    NSInteger nr = 1;
+    
+    scanner = [NSScanner scannerWithString:BigStringData];
+    [scanner scanUpToString:@"-1" intoString:&AllDescriptions];
+    
+    scanner = [NSScanner scannerWithString:AllDescriptions];
+    
+    while(![scanner isAtEnd])
+    {
+        //All descriptions are at start in the data file
+        [scanner scanUpToString:@"\n" intoString:&oneLine];
+        //NSLog(oneLine);
+        oneLineScanner = [NSScanner scannerWithString:oneLine];
+        [oneLineScanner scanInteger:&temp];
+        [oneLineScanner scanUpToString:@"\n" intoString:&text_desc];
+        if (temp == nr)
+        {
+            if (text_desc != NULL)
+            {
+                //NSLog(array_descriptions.lastObject);
+                temp_string = [array_descriptions.lastObject stringByAppendingString:text_desc];
+                [array_descriptions replaceObjectAtIndex:(array_descriptions.count-1U)  withObject:temp_string];
+            }
+            
+            
+        }
+        else
+        {
+            [array_descriptions addObject:text_desc];
+            nr++;
+
+        }
+        
+        //NSLog(@" %d -> %@",temp,oneLine);
+        
+    }
+    return array_descriptions;
+}
 
 
 +(void)findAllItemMessage

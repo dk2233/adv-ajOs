@@ -23,13 +23,9 @@ NSMutableArray          *AllExitCommands;
     
     NSString *fileName;
     fileName = [NSString stringWithUTF8String:"adventure.text"];
-    
-    
     AllDataFromFile =[NSString stringWithContentsOfFile:fileName
                                                encoding:NSASCIIStringEncoding
                                                   error:NULL];
-
-
 }
 
 
@@ -108,8 +104,6 @@ NSMutableArray          *AllExitCommands;
             }
         }
     }
-    
-    
 }
 
 +(void)findAllCommandsTable
@@ -205,6 +199,10 @@ NSMutableArray          *AllExitCommands;
     //NSLog(@"%@",_AllExitCommands);
     
 }
+
+
+
+
 
 +(void)findAllItemStartLocation
 {
@@ -332,7 +330,7 @@ NSMutableArray          *AllExitCommands;
 
 
 
-+ (void) AnalyzeCommandFromUser:(NSString *)wordFromUser  tab_of_all_commandsForOut:(NSMutableArray *)exitCommand_tab actual_location:(Location *)LocationActual;
++ (void) AnalyzeCommandFromUser:(NSString *)wordFromUser  tab_of_all_commandsForOut:(NSMutableArray *)exitCommand_tab actual_location:(LocationFunctions *)LocationActual;
 {
      //MovingMethodFromOtherClass:(SEL)WhenIWantMoving
               //

@@ -53,22 +53,17 @@ NSUInteger          NumberOfLocation;
 
 
 
-@implementation  Location
+@implementation  LocationFunctions
 
 -(id)init
 {
-    //NSNumber *internal = RESET;
-    _location_number = RESET;
-    _DataForExitsForLocation=[[NSMutableArray alloc] init];
-    //_AllExitsForLocation=[[NSMutableArray alloc] init];
     
-    //self.AllExitCommands = [[NSMutableArray alloc]init];
     return self;
 }
 
--(void)ShowDescription
+-(void)ShowDescription: (NSNumber *)loc_nr
 {
-    NSInteger nr_searched = [_location_number integerValue];
+    NSInteger nr_searched = [loc_nr integerValue];
     
     NSScanner *theScanner;
     NSString *str1;
@@ -134,7 +129,7 @@ NSUInteger          NumberOfLocation;
         //NSLog(@"%@",array);
         for(uint8_t i=1U; i<array.count ; i++)
         {
-            if ([self.location_number isEqual:[array objectAtIndex:i ] ])
+            if ([loc_nr isEqual:[array objectAtIndex:i ] ])
             {
                 //NSLog(@"%@ object nr %ld",array,a);
                 [self findThisItemMessage:[NSNumber numberWithInteger:a]];
@@ -171,11 +166,11 @@ NSUInteger          NumberOfLocation;
 
 
 
--(void)ShowAllExitData
+-(void)ShowAllExitData: (NSMutableArray *)ExitsForLocation
 {
     NSArray *tarray;
     
-    for(tarray in _DataForExitsForLocation)
+    for(tarray in ExitsForLocation)
     {
         NSString *exits_string = @" " ;
         exits_string = [exits_string stringByAppendingString:@" all exit are: "];
@@ -203,7 +198,7 @@ NSUInteger          NumberOfLocation;
 }
 
 
--(NSMutableArray *)findExits:(NSNumber *)locNumberToFindExits
+-(NSMutableArray *)findExits:(NSNumber *)locNumberToFindExits 
 {
     self.DataForExitsForLocation=[[NSMutableArray alloc] init];
     
@@ -393,7 +388,7 @@ int main(int argc, const char * argv[])
 {
     NSInteger nr_int;
     //NSInteger *Numb
-    int  var_i;
+    NSUInteger  var_i;
     NSString *str1;
     
     //NSInteger nr_searched = [searchedString integerValue];
@@ -404,6 +399,7 @@ int main(int argc, const char * argv[])
     
    
     NSMutableArray  *mutableArrayExits;
+    NSMutableArray *LocationObjectsArray = [[NSMutableArray alloc] init];
     //AllExitsTable = [ [NSMutableArray alloc]init ];
     
     @autoreleasepool {
@@ -416,7 +412,7 @@ int main(int argc, const char * argv[])
          *
          */
         
-        Location *loc1 = [Location alloc];
+        LocationFunctions *loc1 = [LocationFunctions alloc];
         //loc1.location_number=@10;
 
         NSLog(@" arguments %d ",argc);
@@ -448,6 +444,11 @@ int main(int argc, const char * argv[])
         //NumberOfLocation = [AllExitsTable count];
         NSLog(@"Number of location %lu",(unsigned long)NumberOfLocation);
         //here i put a loop to create class instances for all location
+        
+        for(var_i = RESET; var_i < NumberOfLocation; var_i++)
+        {
+            [LocationObjectsArray addObject:[[LocationFunctions alloc] init]];
+        }
         
         
         

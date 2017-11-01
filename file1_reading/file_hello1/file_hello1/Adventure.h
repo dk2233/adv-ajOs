@@ -34,11 +34,9 @@ extern NSUInteger           NumberOfLocation;
 
 
 
-
-
-
-@interface Location : NSObject
+@interface LocationFunctions : NSObject
 //actual location number
+
 @property NSNumber *location_number;
 //all exits for location number
 //all data exit for location number
@@ -47,15 +45,29 @@ extern NSUInteger           NumberOfLocation;
 -(id)init;
 -(NSMutableArray *)findExits:(NSNumber *)locNumberToFindExits;
 -(void)findThisItemMessage:(NSNumber *)ItemNumber;
--(void)ShowDescription;
+-(void)ShowDescription:(NSNumber *)loc_nr;
 -(void)ShowAllData;
 -(BOOL)MoveToLocationIfThisIsPossible:(NSNumber*)nr;
--(void)ShowAllExitData;
+-(void)ShowAllExitData: (NSMutableArray *)ExitsForLocation;
 -(NSMutableArray *)CheckAllExitsCommandForLocation;
 
 @end
 
 
+
+@interface LocationItems: LocationFunctions
+
+@property NSNumber *location_number;
+//all exits for location number
+//all data exit for location number
+@property NSMutableArray *DataForExitsForLocation;
+
+//@property
+
+//@property
+
+
+@end
 
 @interface ToolsForLocation : NSObject
 
@@ -66,7 +78,7 @@ extern NSUInteger           NumberOfLocation;
 +(void)findAllItemStartLocation;
 +(void)findAllItemMessage;
 +(NSString *)WaitForCommand;
-+(void)AnalyzeCommandFromUser:(NSString *)wordFromUser tab_of_all_commandsForOut:(NSMutableArray *)exitCommand_tab actual_location:(Location *)LocationActual;
++(void)AnalyzeCommandFromUser:(NSString *)wordFromUser tab_of_all_commandsForOut:(NSMutableArray *)exitCommand_tab actual_location:(LocationFunctions *)LocationActual;
 
 +(void)WriteMarkers: (NSUInteger)nr_of_symbols;
 //

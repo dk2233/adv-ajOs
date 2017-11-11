@@ -354,9 +354,7 @@ NSMutableArray          *AllExitCommands;
             }
             break;
         }
-        
     }
-    
 }
 
 
@@ -387,7 +385,6 @@ NSMutableArray          *AllExitCommands;
 {
      //MovingMethodFromOtherClass:(SEL)WhenIWantMoving
               //
-
     NSUInteger loc;
     for( NSMutableArray *row1 in exitCommand_tab)
     {

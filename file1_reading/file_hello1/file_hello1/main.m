@@ -547,8 +547,9 @@ int main(int argc, const char * argv[])
         for(var_i = RESET; var_i < NumberOfLocation; var_i++)
         {
             LocationItems *loc_item = [LocationItems alloc];
-            loc_item.LocationDescription =[AllLocationDescription objectAtIndex:var_i];
             
+            loc_item.LocationDescription =[AllLocationDescription objectAtIndex:var_i];
+            loc_item.ExitsForLocation = [AllExitsTable objectAtIndex:var_i];
             [LocationObjectsArray addObject: loc_item];
             //[loc_item release];
             //LocationObjectsArray.lastObject.LocationDescription =[AllLocationDescription objectAtIndex:var_i];
@@ -583,7 +584,7 @@ int main(int argc, const char * argv[])
             else if ([word containsString:@"location"])
             {
                 //[loc1 ShowDescription];
-                NSLog([[LocationObjectsArray objectAtIndex:starting_nsu] LocationDescription]);
+                NSLog([[LocationObjectsArray objectAtIndex:loc1.location_number] LocationDescription]);
             }
             
             else if ([word containsString:@"go"])
@@ -599,7 +600,7 @@ int main(int argc, const char * argv[])
                     NSNumber  *loc_nr =[NSNumber numberWithInteger:nr_int];
                     (void)[loc1 MoveToLocationIfThisIsPossible:loc_nr];
                     //[loc1 ShowDescription];
-                    NSLog([[LocationObjectsArray objectAtIndex:starting_nsu] LocationDescription]);
+                    NSLog([[LocationObjectsArray objectAtIndex:[loc1.location_number integerValue]] LocationDescription]);
                     mutableArrayExits = [loc1 findExits:loc1.location_number];
                     //NSLog(@"%@" , mutableArrayExits);
                 }
@@ -607,7 +608,6 @@ int main(int argc, const char * argv[])
             else if ([word containsString:@"exits"])
             {
                 [loc1 ShowAllExitData];
-                
                 
             }
             else if ([word containsString:@"help"])
@@ -631,7 +631,8 @@ int main(int argc, const char * argv[])
                 //MovingMethodFromOtherClass:@selector(MoveToLocationIfThisIsPossible:loc_nr:)];
                 
                 //[loc1 ShowDescription];
-                NSLog([[LocationObjectsArray objectAtIndex:starting_nsu] LocationDescription]);
+                NSLog(@"%d",[loc1.location_number integerValue]);
+                NSLog([[LocationObjectsArray objectAtIndex:[loc1.location_number integerValue]] LocationDescription]);
                 mutableArrayExits = [loc1 findExits:loc1.location_number];
             }
             

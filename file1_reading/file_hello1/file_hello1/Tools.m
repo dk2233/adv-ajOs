@@ -34,6 +34,7 @@ NSMutableArray          *AllExitCommands;
     
     //initialization of
     [array_descriptions addObject:@""];
+    [array_descriptions addObject:@""];
      //[[NSString alloc]init]];
     
     NSString  *AllDescriptions = [[NSString alloc]init];
@@ -43,7 +44,7 @@ NSMutableArray          *AllExitCommands;
     NSScanner *scanner, *oneLineScanner;
     
     NSInteger temp;
-    NSInteger nr = 1;
+    NSInteger nr = 1U;
     
     scanner = [NSScanner scannerWithString:BigStringData];
     [scanner scanUpToString:@"-1" intoString:&AllDescriptions];
@@ -259,6 +260,13 @@ NSMutableArray          *AllExitCommands;
 
 +(void)findAllItemStartLocation
 {
+    /*SECTION 7: OBJECT LOCATIONS.  EACH LINE CONTAINS AN OBJECT NUMBER AND ITS
+     *	INITIAL LOCATION (ZERO (OR OMITTED) IF NONE).  IF THE OBJECT IS
+     *	IMMOVABLE, THE LOCATION IS FOLLOWED BY A "-1".  IF IT HAS TWO LOCATIONS
+     *	(E.G. THE GRATE) THE FIRST LOCATION IS FOLLOWED WITH THE SECOND, AND
+     *	THE OBJECT IS ASSUMED TO BE IMMOVABLE.
+     */
+
     NSScanner *scannerItems, *oneLineScanner;
     scannerItems = [NSScanner scannerWithString:AllDataFromFile];
     AllItemsLocation = [ [NSMutableArray alloc]init ];
@@ -299,7 +307,7 @@ NSMutableArray          *AllExitCommands;
                     [oneLineScanner scanInteger:&temp];
                     [AllItemsLocation.lastObject addObject:[NSNumber numberWithInteger:temp]];
                     
-                    temp = [ [AllItemsLocation.lastObject objectAtIndex:0U] integerValue]-1;
+                    //temp = [ [AllItemsLocation.lastObject objectAtIndex:0U] integerValue]-1;
                 }
                 //NSLog(@" item: %@ is at location %@",[[_AllItems objectAtIndex:temp] objectAtIndex:0U],
                 //     [_AllItemsLocation.lastObject objectAtIndex:1U]);

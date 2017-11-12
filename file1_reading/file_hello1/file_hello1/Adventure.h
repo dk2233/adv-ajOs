@@ -43,6 +43,8 @@ extern NSUInteger           NumberOfLocation;
 //all data exit for location number
 @property NSMutableArray *DataForExitsForLocation;
 
+@property NSMutableArray *LocationClassInstancesArray;
+
 -(id)init;
 -(NSMutableArray *)findExits:(NSNumber *)locNumberToFindExits;
 -(void)findThisItemMessage:(NSNumber *)ItemNumber;

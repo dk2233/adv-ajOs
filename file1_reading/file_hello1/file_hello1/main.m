@@ -30,6 +30,7 @@ NSNumber            *nr_of_treasure;
 NSNumber            *nr;
 NSMutableArray      *AllExits;
 NSUInteger          NumberOfLocation;
+NSMutableArray          *LocationClassInstancesArray ;
 
 /*
  this classs is for 
@@ -57,7 +58,7 @@ NSUInteger          NumberOfLocation;
 
 -(id)init
 {
-    self.LocationClassInstancesArray = [[NSMutableArray alloc] init];
+    //self.LocationClassInstancesArray = [[NSMutableArray alloc] init];
     return self;
 }
 
@@ -158,12 +159,10 @@ NSUInteger          NumberOfLocation;
     {
         nr_searched = [loc_nr integerValue];
     }
-    printf("nr searched %d ",nr_searched,"\n\n");
-
-    LocationItems *aa = [self.LocationClassInstancesArray objectAtIndex:nr_searched];
+    //printf("nr searched %d \n\n",nr_searched);
     
-    NSLog([[self.LocationClassInstancesArray objectAtIndex:nr_searched] LocationDescription]);
-    NSLog(aa.LocationDescription);
+    NSLog(@"%@",[[LocationClassInstancesArray objectAtIndex:nr_searched] LocationDescription]);
+    NSLog(@"%@",[[LocationClassInstancesArray objectAtIndex:0U] LocationDescription]);
     
     int8_t a=0;
     boolean_t isFound = false;
@@ -439,7 +438,10 @@ NSUInteger          NumberOfLocation;
 
 
 @implementation  LocationItems
-
+-(id)init
+{
+    return self;
+}
 @end
 
 
@@ -459,8 +461,6 @@ int main(int argc, const char * argv[])
     
     NSMutableArray  *mutableArrayExits;
     
-    //AllExitsTable = [ [NSMutableArray alloc]init ];
-    
     @autoreleasepool {
         /*
          /REading all data in form of strings
@@ -472,6 +472,7 @@ int main(int argc, const char * argv[])
          */
         
         LocationFunctions *loc_main_func = [LocationFunctions alloc];
+        NSMutableArray  *LocationClassInstancesArray = [[NSMutableArray alloc] init];
         //loc1.location_number=@10;
         
         NSLog(@" arguments %d ",argc);
@@ -507,20 +508,21 @@ int main(int argc, const char * argv[])
         
         for(var_i = RESET; var_i < NumberOfLocation; var_i++)
         {
-            LocationItems *loc_item = [LocationItems alloc];
+            LocationItems *loc_item = [[LocationItems alloc]init];
             
             loc_item.LocationDescription =[AllLocationDescription objectAtIndex:var_i];
             loc_item.ExitsForLocation = [AllExitsTable objectAtIndex:var_i];
-            [loc_main_func.LocationClassInstancesArray addObject: loc_item];
+            [LocationClassInstancesArray addObject: loc_item];
             //[loc_item release];
-            NSLog([[loc_main_func.LocationClassInstancesArray lastObject] LocationDescription] );
+            //NSLog([[loc_main_func.LocationClassInstancesArray lastObject] LocationDescription] );
         }
         
-        [loc_main_func ShowDescription:[NSNumber numberWithInteger:starting_nsu]];
-        
-        NSLog([[loc_main_func.LocationClassInstancesArray objectAtIndex:starting_nsu] LocationDescription]);
-        //NSLog([[LocationObjectsArray objectAtIndex:starting_nsu] LocationDescription]);
-        
+        //[loc_main_func ShowDescription:[NSNumber numberWithInteger:starting_nsu]];
+        LocationItems *loc_item = [LocationClassInstancesArray objectAtIndex:starting_nsu];
+        NSLog(loc_item.LocationDescription);
+//        loc_item.LocationDescription;
+//        NSLog((id)[LocationClassInstancesArray objectAtIndex:starting_nsu].LocationDescription);
+        NSLog([[LocationClassInstancesArray objectAtIndex:starting_nsu] LocationDescription]);
         mutableArrayExits = [loc_main_func findExits:loc_main_func.location_number];
         
         NSScanner *mainScanner;
@@ -558,8 +560,10 @@ int main(int argc, const char * argv[])
                 {
                     NSNumber  *loc_nr =[NSNumber numberWithInteger:nr_int];
                     (void)[loc_main_func MoveToLocationIfThisIsPossible:loc_nr];
-                    [loc_main_func ShowDescription];
-                    //NSLog([[LocationObjectsArray objectAtIndex:[loc_main_func.location_number integerValue]] LocationDescription]);
+                    //[loc_main_func ShowDescription];
+                    
+                    //NSLog([[ objectAtIndex:starting_nsu] LocationDescription]);
+                    NSLog([[LocationClassInstancesArray objectAtIndex:[loc_main_func.location_number integerValue]] LocationDescription]);
                     mutableArrayExits = [loc_main_func findExits:loc_main_func.location_number];
                     //NSLog(@"%@" , mutableArrayExits);
                 }

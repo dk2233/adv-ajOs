@@ -16,6 +16,7 @@ NSMutableArray          *AllItemsLocation;
 NSMutableArray          *AllItemMessage;
 NSMutableArray          *AllExitCommands;
 
+
 @implementation ToolsForLocation
 
 +(void)ReadDataFile

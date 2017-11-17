@@ -56,8 +56,12 @@ NSMutableArray          *LocationClassInstancesArray ;
 
 @implementation  LocationFunctions
 
--(id)init
+-(id)initSuper
 {
+    if( (self = [super init]) )
+    {
+        NSLog(@"Initialize superclass for Locations ");
+    }
     //self.LocationClassInstancesArray = [[NSMutableArray alloc] init];
     return self;
 }
@@ -519,10 +523,10 @@ int main(int argc, const char * argv[])
         
         //[loc_main_func ShowDescription:[NSNumber numberWithInteger:starting_nsu]];
         LocationItems *loc_item = [LocationClassInstancesArray objectAtIndex:starting_nsu];
-        NSLog(loc_item.LocationDescription);
+        NSLog(@"%@",loc_item.LocationDescription);
 //        loc_item.LocationDescription;
 //        NSLog((id)[LocationClassInstancesArray objectAtIndex:starting_nsu].LocationDescription);
-        NSLog([[LocationClassInstancesArray objectAtIndex:starting_nsu] LocationDescription]);
+        NSLog(@"%@",[[LocationClassInstancesArray objectAtIndex:starting_nsu] LocationDescription]);
         mutableArrayExits = [loc_main_func findExits:loc_main_func.location_number];
         
         NSScanner *mainScanner;
@@ -563,7 +567,7 @@ int main(int argc, const char * argv[])
                     //[loc_main_func ShowDescription];
                     
                     //NSLog([[ objectAtIndex:starting_nsu] LocationDescription]);
-                    NSLog([[LocationClassInstancesArray objectAtIndex:[loc_main_func.location_number integerValue]] LocationDescription]);
+                    NSLog(@"%@",[[LocationClassInstancesArray objectAtIndex:[loc_main_func.location_number integerValue]] LocationDescription]);
                     mutableArrayExits = [loc_main_func findExits:loc_main_func.location_number];
                     //NSLog(@"%@" , mutableArrayExits);
                 }

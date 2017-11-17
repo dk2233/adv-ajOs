@@ -38,6 +38,7 @@ extern NSUInteger           NumberOfLocation;
 
 @interface LocationFunctions : NSObject
 //actual location number
+//it is superclass
 
 @property NSNumber *location_number;
 //all exits for location number
@@ -48,7 +49,7 @@ extern NSUInteger           NumberOfLocation;
 
 //@property NSMutableArray *LocationClassInstancesArray;
 
--(id)init;
+-(id)initSuper;
 -(NSMutableArray *)findExits:(NSNumber *)locNumberToFindExits;
 -(void)findThisItemMessage:(NSNumber *)ItemNumber;
 -(void)ShowDescription:(NSNumber *)loc_nr;

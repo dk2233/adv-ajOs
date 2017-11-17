@@ -31,7 +31,7 @@ extern NSMutableArray       *AllItemMessage;
 extern NSMutableArray       *AllExitCommands;
 extern NSMutableArray       *AllExits;
 extern NSMutableArray       *AllLocationDescription;
-extern NSMutableArray       *LocationClassInstancesArray;
+//extern NSMutableArray       *LocationClassInstancesArray;
 extern NSUInteger           NumberOfLocation;
 
 
@@ -46,8 +46,6 @@ extern NSUInteger           NumberOfLocation;
 @property NSMutableArray *DataForExitsForLocation;
 
 @property NSMutableArray *LocationClassInstancesArray;
-
-//@property NSMutableArray *LocationClassInstancesArray;
 
 -(id)initSuper;
 -(NSMutableArray *)findExits:(NSNumber *)locNumberToFindExits;

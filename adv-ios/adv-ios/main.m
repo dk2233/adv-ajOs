@@ -26,11 +26,9 @@
 
 
 
-NSNumber            *nr_of_treasure;
+//NSNumber            *nr_of_treasure;
 NSNumber            *nr;
 NSMutableArray      *AllExits;
-NSUInteger          NumberOfLocation;
-//NSMutableArray          *LocationClassInstancesArray ;
 
 /*
  this classs is for 
@@ -54,7 +52,7 @@ NSUInteger          NumberOfLocation;
 
 
 
-@implementation  LocationFunctions
+@implementation  TextGameFunctions
 
 -(id)initSuper
 {
@@ -69,18 +67,16 @@ NSUInteger          NumberOfLocation;
 
 
 
-+(NSString *)findLocationDescription
+-(NSString *)findLocationDescription:(NSString *)StringWithAllData
 {
     //NSString *description;
     NSScanner *scanner, *oneLineScanner;
-    scanner = [NSScanner scannerWithString:AllDataFromFile];
-    AllItemMessage = [ [NSMutableArray alloc]init ];
+    scanner = [NSScanner scannerWithString:StringWithAllData];
     //self.AllItems = [ [NSMutableArray alloc]init ];
     
     NSString *oneLine;
     NSInteger temp;
     uint8_t stateOfSearching = 0U;
-    NSString *message;
     
     while(![scanner isAtEnd])
     {
@@ -106,35 +102,6 @@ NSUInteger          NumberOfLocation;
                 }
                 
                 [oneLineScanner scanInteger:&temp];
-                
-                //if ((temp<100) && (temp != 0U))
-                //{
-                /* if there is a new object found I have to initialize new NSMutableArray
-                 */
-                [AllItemMessage addObject:[[ NSMutableArray alloc] init]];
-                //}
-                
-                //NSLog(@"%@",oneLine);
-                
-                [oneLineScanner scanUpToString:@"\n" intoString:&message];
-                
-                [AllItemMessage.lastObject addObject:[NSNumber numberWithInteger:temp]];
-                [AllItemMessage.lastObject addObject:message];
-                
-                
-                //NSLog(@"number = %ld with \n %@",temp,message);
-                
-                
-                //
-                //                [scanner scanUpToString:@"\n" intoString:&oneLine ];
-                //                oneLineScanner = [NSScanner scannerWithString:oneLine];
-                //
-                //                [oneLineScanner scanInteger:&temp];
-                //
-                //                NSLog(@"number = %ld",temp);
-                
-                
-                
                 
             }
             
@@ -167,13 +134,8 @@ NSUInteger          NumberOfLocation;
     //printf("nr searched %d \n\n",nr_searched);
     
     NSLog(@"%@",[[self.LocationClassInstancesArray objectAtIndex:nr_searched] LocationDescription]);
-    //NSLog(@"%@",[[LocationClassInstancesArray objectAtIndex:0U] LocationDescription]);
     
-    //LocationItems *loc_item = [LocationClassInstancesArray objectAtIndex:starting_nsu];
-    //NSLog(@"%@",loc_item.LocationDescription);
-    
-    int8_t a=0;
-    boolean_t isFound = false;
+    uint8_t item_id=0;
     //show item if in that location
     /*SECTION 7: OBJECT LOCATIONS.  EACH LINE CONTAINS AN OBJECT NUMBER AND ITS
      *	INITIAL LOCATION (ZERO (OR OMITTED) IF NONE).  IF THE OBJECT IS
@@ -181,48 +143,29 @@ NSUInteger          NumberOfLocation;
      *	(E.G. THE GRATE) THE FIRST LOCATION IS FOLLOWED WITH THE SECOND, AND
      *	THE OBJECT IS ASSUMED TO BE IMMOVABLE.
      */
-    
-    a=1U;
-    for( NSMutableArray *array in AllItemsLocation)
+    NSLog(@"%ld",nr_searched);
+    for( NSMutableArray *OneArray in AllItemsLocation)
     {
-        //NSLog(@"%@",array);
-        for(uint8_t i=1U; i<array.count ; i++)
+        
+        for(uint8_t i=0U; i<OneArray.count ; i++)
         {
-            if (nr_searched == [[array objectAtIndex:i ] integerValue ] )
+            
+            if (nr_searched == [[OneArray objectAtIndex:i ] integerValue ] )
             {
+                //NSLog(@"%d",item_id);
                 //NSLog(@"%@ object nr %ld",array,a);
-                [self findThisItemMessage:[NSNumber numberWithInteger:a]];
-                //isFound = true;
-                //break;
+                
+                NSLog(@"%@",[[AllItemMessage objectAtIndex:item_id] objectAtIndex:1]);
+
             }
         }
-        if (isFound == true)
-        {
-            break;
-        }
+
         
-        a++;
+        item_id++;
         
     }
     
 }
-
--(void)findThisItemMessage:(NSNumber *)ItemNumber
-{
-    NSUInteger iter=0U;
-    for(NSMutableArray *One_row in AllItemMessage)
-    {
-        //NSLog(@" %@ ",[One_row objectAtIndex:0U]);
-        if ([[One_row objectAtIndex:0U] isEqual:ItemNumber] )
-        {
-            NSLog(@"%@",[[AllItemMessage objectAtIndex:iter] objectAtIndex:1U]);
-        }
-        iter++;
-    }
-    
-    
-}
-
 
 
 -(void)ShowAllExitData
@@ -247,13 +190,13 @@ NSUInteger          NumberOfLocation;
 }
 
 
--(void)ShowAllData
+-(void)ShowAllData:(NSMutableArray *) MutableArray
 //(NSArray *)data
 {
     
-    for(NSMutableArray *line in AllItemMessage )
+    for(NSMutableArray *line in MutableArray )
     {
-        NSLog(@"%@",[line objectAtIndex:0U]);
+        NSLog(@"%@",line);
     }
 }
 
@@ -453,63 +396,52 @@ int main(int argc, const char * argv[])
     NSInteger nr_int;
     NSUInteger  var_i;
     NSUInteger  starting_nsu;
-    //NSString *str1;
-    
-    //NSInteger nr_searched = [starting_location integerValue];
-    //NSScanner *minorScanner;
-    //NSCharacterSet *numbers = [NSCharacterSet characterSetWithCharactersInString:@"1234567890"];
-    //NSCharacterSet *empty = [NSCharacterSet characterSetWithCharactersInString:@" "];
-    
-    
-    
     NSMutableArray  *mutableArrayExits;
+    
+    
+    
     
     @autoreleasepool {
         /*
          /REading all data in form of strings
          */
         
-        //AllDataFromFile =zStr;
-        /*
-         *
-         */
+        //functions - super class
+        TextGameFunctions *loc_main_func = [[TextGameFunctions alloc] initSuper];
+        //tools
+        ToolsForTextGame *ToolsForTexts = [[ToolsForTextGame alloc] initGame];
         
-        LocationFunctions *loc_main_func = [[LocationFunctions alloc] initSuper];
-        //NSMutableArray  *LocationClassInstancesArray = [[NSMutableArray alloc] init];
-        //loc1.location_number=@10;
+        //[loc_main_func ShowAllData:AllItemsLocation ];
         
         NSLog(@" arguments %d ",argc);
         
         if (argc<2)
         {
-            [ToolsForLocation WriteMarkers:NR_OF_MARKERS];
-            NSLog(@" You have to give an argument");
-            [ToolsForLocation WriteMarkers:NR_OF_MARKERS];
-            //i have to exit
-            return 0;
+            [ToolsForTextGame WriteMarkers:NR_OF_MARKERS];
+            NSLog(@" You have to give an argument - if not starting in first location");
+            [ToolsForTextGame WriteMarkers:NR_OF_MARKERS];
+            starting_nsu = 1;
+        }
+        else
+        {
+            
+            NSString *starting_location =[NSString stringWithFormat:@"%s",argv[1]];
+            NSNumberFormatter *format = [[NSNumberFormatter alloc] init];
+            format.numberStyle = NSNumberFormatterDecimalStyle;
+            loc_main_func.location_number = [format numberFromString:starting_location];
+            starting_nsu = [starting_location integerValue]-0;
         }
         
-        NSString *starting_location =[NSString stringWithFormat:@"%s",argv[1]];
-        NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
-        f.numberStyle = NSNumberFormatterDecimalStyle;
-        loc_main_func.location_number = [f numberFromString:starting_location];
-        starting_nsu = [starting_location integerValue]-0;
         
-        [ToolsForLocation ReadDataFile];
-        [ToolsForLocation findAllExitTable];
-        [ToolsForLocation findAllCommandsTable];
-        [ToolsForLocation findAllItemStartLocation];
-        [ToolsForLocation findAllItemMessage];
+        NSMutableArray *AllLocationDescription = [ToolsForTexts findAllLocationDescription:ToolsForTexts.AllDataFromFile];
         
-        NSMutableArray *AllLocationDescription = [ToolsForLocation findAllLocationDescription:AllDataFromFile];
         
-        NumberOfLocation = [ToolsForLocation FindNumberOfLocation];
         
         //NumberOfLocation = [AllExitsTable count];
-        NSLog(@"Number of location %lu",(unsigned long)NumberOfLocation);
+        NSLog(@"Number of location %lu",(unsigned long)ToolsForTexts.NumberOfLocation);
         //here i put a loop to create class instances for all location
         //loc_main_func.LocationClassInstancesArray = [[NSMutableArray alloc] init];
-        for(var_i = RESET; var_i < NumberOfLocation; var_i++)
+        for(var_i = RESET; var_i < ToolsForTexts.NumberOfLocation; var_i++)
         {
             LocationItems *loc_item = [LocationItems alloc];
             
@@ -535,7 +467,7 @@ int main(int argc, const char * argv[])
             
             //[loc1 findExits];
             //printf(">");
-            word = [ToolsForLocation WaitForCommand];
+            word = [ToolsForTextGame WaitForCommand];
             //NSLog(@"new => %@",word);
             
             if ([word containsString:@"dupa"])
@@ -587,7 +519,7 @@ int main(int argc, const char * argv[])
             }
             else
             {
-                [ToolsForLocation AnalyzeCommandFromUser:word   tab_of_all_commandsForOut:mutableArrayExits actual_location:loc_main_func];
+                [ToolsForTexts AnalyzeCommandFromUser:word   tab_of_all_commandsForOut:mutableArrayExits actual_location:loc_main_func];
                 
                 //MovingMethodFromOtherClass:@selector(MoveToLocationIfThisIsPossible:loc_nr:)];
                 

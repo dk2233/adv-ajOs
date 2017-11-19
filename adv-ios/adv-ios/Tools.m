@@ -9,7 +9,6 @@
 #import <Foundation/Foundation.h>
 #import "Adventure.h"
 
-NSString                *AllDataFromFile;
 NSMutableArray          *AllExitsTable ;
 NSMutableArray          *AllItems;
 NSMutableArray          *AllItemsLocation;
@@ -17,19 +16,30 @@ NSMutableArray          *AllItemMessage;
 NSMutableArray          *AllExitCommands;
 
 
-@implementation ToolsForLocation
+@implementation ToolsForTextGame
 
-+(void)ReadDataFile
+-(id)initGame
 {
-    
+    [self ReadDataFile];
+    [self findAllExitTable];
+    [self findAllCommandsTable];
+    [self findAllItemStartLocation];
+    [self findAllItemMessage];
+    _NumberOfLocation = [self FindNumberOfLocation];
+    return self;
+}
+
+-(void)ReadDataFile
+{
+
     NSString *fileName;
-    fileName = [NSString stringWithUTF8String:"adventure.text"];
-    AllDataFromFile =[NSString stringWithContentsOfFile:fileName
+    fileName = [NSString stringWithUTF8String:ADV_FILE_WITH_DATA];
+    self.AllDataFromFile =[NSString stringWithContentsOfFile:fileName
                                                encoding:NSASCIIStringEncoding
                                                   error:NULL];
 }
 
-+(NSMutableArray *)findAllLocationDescription: (NSString *)BigStringData
+-(NSMutableArray *)findAllLocationDescription: (NSString *)BigStringData
 {
     NSMutableArray *array_descriptions = [[NSMutableArray alloc]init];
     
@@ -85,13 +95,12 @@ NSMutableArray          *AllExitCommands;
 }
 
 
-+(void)findAllItemMessage
+-(void)findAllItemMessage
 {
     NSScanner *scanner, *oneLineScanner;
-    scanner = [NSScanner scannerWithString:AllDataFromFile];
+    scanner = [NSScanner scannerWithString:self.AllDataFromFile];
     AllItemMessage = [ [NSMutableArray alloc]init ];
-    //self.AllItems = [ [NSMutableArray alloc]init ];
-    
+    [AllItemMessage addObject:[[ NSMutableArray alloc] init]];
     NSString *oneLine;
     NSInteger temp;
     uint8_t stateOfSearching = 0U;
@@ -122,12 +131,12 @@ NSMutableArray          *AllExitCommands;
                 
                 [oneLineScanner scanInteger:&temp];
                 
-                //if ((temp<100) && (temp != 0U))
-                //{
+                if ((temp<100) && (temp != 0U))
+                {
                 /* if there is a new object found I have to initialize new NSMutableArray
                  */
-                [AllItemMessage addObject:[[ NSMutableArray alloc] init]];
-                //}
+                    [AllItemMessage addObject:[[ NSMutableArray alloc] init]];
+                }
                 
                 //NSLog(@"%@",oneLine);
                 
@@ -135,21 +144,6 @@ NSMutableArray          *AllExitCommands;
                 
                 [AllItemMessage.lastObject addObject:[NSNumber numberWithInteger:temp]];
                 [AllItemMessage.lastObject addObject:message];
-                
-                
-                //NSLog(@"number = %ld with \n %@",temp,message);
-                
-                
-                //
-                //                [scanner scanUpToString:@"\n" intoString:&oneLine ];
-                //                oneLineScanner = [NSScanner scannerWithString:oneLine];
-                //
-                //                [oneLineScanner scanInteger:&temp];
-                //
-                //                NSLog(@"number = %ld",temp);
-                
-                
-                
                 
             }
             
@@ -161,10 +155,10 @@ NSMutableArray          *AllExitCommands;
     }
 }
 
-+(void)findAllCommandsTable
+-(void)findAllCommandsTable
 {
     NSScanner *scannerExits, *oneLineScanner;
-    scannerExits = [NSScanner scannerWithString:AllDataFromFile];
+    scannerExits = [NSScanner scannerWithString:self.AllDataFromFile];
     AllExitCommands = [ [NSMutableArray alloc]init ];
     AllItems = [ [NSMutableArray alloc]init ];
     
@@ -259,7 +253,7 @@ NSMutableArray          *AllExitCommands;
 
 
 
-+(void)findAllItemStartLocation
+-(void)findAllItemStartLocation
 {
     /*SECTION 7: OBJECT LOCATIONS.  EACH LINE CONTAINS AN OBJECT NUMBER AND ITS
      *	INITIAL LOCATION (ZERO (OR OMITTED) IF NONE).  IF THE OBJECT IS
@@ -269,9 +263,10 @@ NSMutableArray          *AllExitCommands;
      */
 
     NSScanner *scannerItems, *oneLineScanner;
-    scannerItems = [NSScanner scannerWithString:AllDataFromFile];
+    scannerItems = [NSScanner scannerWithString:self.AllDataFromFile];
     AllItemsLocation = [ [NSMutableArray alloc]init ];
-    
+    //there is no 0-id item - so lets add empty row
+    [AllItemsLocation  addObject:[[NSMutableArray alloc]init ] ];
     
     NSString *oneLine;
     NSInteger temp=RESET;
@@ -302,16 +297,16 @@ NSMutableArray          *AllExitCommands;
                 
                 [AllItemsLocation  addObject:[[NSMutableArray alloc]init ] ];
                 
+                //I am omitting first number - it is id of item
+                [oneLineScanner scanInteger:&temp];
+                
                 while( ![oneLineScanner isAtEnd])
                 {
                     
                     [oneLineScanner scanInteger:&temp];
                     [AllItemsLocation.lastObject addObject:[NSNumber numberWithInteger:temp]];
                     
-                    //temp = [ [AllItemsLocation.lastObject objectAtIndex:0U] integerValue]-1;
                 }
-                //NSLog(@" item: %@ is at location %@",[[_AllItems objectAtIndex:temp] objectAtIndex:0U],
-                //     [_AllItemsLocation.lastObject objectAtIndex:1U]);
                 
             }
         }
@@ -319,11 +314,11 @@ NSMutableArray          *AllExitCommands;
     
 }
 
-+(void)findAllExitTable
+-(void)findAllExitTable
 {
     AllExitsTable = [[NSMutableArray alloc] init];
     NSScanner *scannerExits, *oneLineScanner;
-    scannerExits = [NSScanner scannerWithString:AllDataFromFile];
+    scannerExits = [NSScanner scannerWithString:self.AllDataFromFile];
     
     //AllExitCommands= [ [NSMutableArray alloc]init ];
     NSString *oneLine;
@@ -390,7 +385,7 @@ NSMutableArray          *AllExitCommands;
 
 
 
-+ (void) AnalyzeCommandFromUser:(NSString *)wordFromUser  tab_of_all_commandsForOut:(NSMutableArray *)exitCommand_tab actual_location:(LocationFunctions *)LocationActual;
+-(void) AnalyzeCommandFromUser:(NSString *)wordFromUser  tab_of_all_commandsForOut:(NSMutableArray *)exitCommand_tab actual_location:(TextGameFunctions *)LocationActual;
 {
      //MovingMethodFromOtherClass:(SEL)WhenIWantMoving
               //
@@ -434,7 +429,7 @@ NSMutableArray          *AllExitCommands;
 
 
 
-+(NSUInteger)FindNumberOfLocation
+-(NSUInteger)FindNumberOfLocation
 {
     NSUInteger number;
     NSMutableArray *oneLine = AllExitsTable.lastObject;

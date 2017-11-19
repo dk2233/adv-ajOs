@@ -16,12 +16,15 @@
 
 
 
+
+#define ADV_FILE_WITH_DATA  "adventure.text"
+
 /////////////////////////////////////////////////////////////////
 // Exported Tables
 /////////////////////////////////////////////////////////////////
 
 //all data from file
-extern NSString             *AllDataFromFile;
+//extern
 //all exits
 extern NSMutableArray       *AllExitsTable;
 extern NSMutableArray       *AllItems;
@@ -31,12 +34,10 @@ extern NSMutableArray       *AllItemMessage;
 extern NSMutableArray       *AllExitCommands;
 extern NSMutableArray       *AllExits;
 extern NSMutableArray       *AllLocationDescription;
-//extern NSMutableArray       *LocationClassInstancesArray;
-extern NSUInteger           NumberOfLocation;
 
 
 
-@interface LocationFunctions : NSObject
+@interface TextGameFunctions : NSObject
 //actual location number
 //it is superclass
 
@@ -49,10 +50,11 @@ extern NSUInteger           NumberOfLocation;
 
 -(id)initSuper;
 -(NSMutableArray *)findExits:(NSNumber *)locNumberToFindExits;
--(void)findThisItemMessage:(NSNumber *)ItemNumber;
+-(NSString *)findLocationDescription:(NSString *)StringWithAllData;
+//-(void)findThisItemMessage:(NSNumber *)ItemNumber fromThatArray:(NSMutableArray *)ArrayWithItemMessage;
 -(void)ShowDescription:(NSNumber *)loc_nr;
 -(void)ShowDescription;
--(void)ShowAllData;
+-(void)ShowAllData:(NSMutableArray *) MutableArray;
 -(BOOL)MoveToLocationIfThisIsPossible:(NSNumber*)nr;
 -(void)ShowAllExitData;
 //: (NSMutableArray *)ExitsForLocation;
@@ -62,14 +64,14 @@ extern NSUInteger           NumberOfLocation;
 
 
 
-@interface LocationItems: LocationFunctions
+@interface LocationItems: TextGameFunctions
 
 //@property NSNumber *location_number;
 //all exits for location number
 //all data exit for location number
 @property NSMutableArray *ExitsForLocation;
 @property NSString  *LocationDescription;
-@property NSMutableArray *LocationItems;
+@property NSMutableArray *ItemsInActualLocation;
 @property NSMutableArray *Persons;
 
 //@property
@@ -79,17 +81,25 @@ extern NSUInteger           NumberOfLocation;
 
 @end
 
-@interface ToolsForLocation : NSObject
+@interface ToolsForTextGame : NSObject
 
-+(NSMutableArray *)findAllLocationDescription: (NSString *)BigStringData;
-+(NSUInteger)FindNumberOfLocation;
-+(void)ReadDataFile;
-+(void)findAllExitTable;
-+(void)findAllCommandsTable;
-+(void)findAllItemStartLocation;
-+(void)findAllItemMessage;
+@property NSString             *AllDataFromFile;
+//LOCSIZ
+@property NSUInteger NumberOfLocation;
+
+//@property NSMutableArray        *AllItemMessage;
+//@property NSMutableArray       *AllItemsLocation;
+
+-(id)initGame;
+-(NSMutableArray *)findAllLocationDescription: (NSString *)BigStringData;
+-(NSUInteger)FindNumberOfLocation;
+-(void)ReadDataFile;
+-(void)findAllExitTable;
+-(void)findAllCommandsTable;
+-(void)findAllItemStartLocation;
+-(void)findAllItemMessage;
 +(NSString *)WaitForCommand;
-+(void)AnalyzeCommandFromUser:(NSString *)wordFromUser tab_of_all_commandsForOut:(NSMutableArray *)exitCommand_tab actual_location:(LocationFunctions *)LocationActual;
+-(void)AnalyzeCommandFromUser:(NSString *)wordFromUser tab_of_all_commandsForOut:(NSMutableArray *)exitCommand_tab actual_location:(TextGameFunctions *)LocationActual;
 
 +(void)WriteMarkers: (NSUInteger)nr_of_symbols;
 //

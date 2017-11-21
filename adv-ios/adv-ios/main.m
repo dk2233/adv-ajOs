@@ -1,14 +1,14 @@
 ////////////////////////////////////////////////////////////////
 //
 //  main.m
-//  file_hello1
+//
 //
 //  Created by daniel on 01.07.2017.
 //  Copyright © 2017 code masterss. All rights reserved.
 //
 //  simple adventure implementation
 // for now I know how to walk between places
-//items locatoin
+//items
 //
 //
 /////////////////////////////////////////////////////////////////
@@ -421,6 +421,7 @@ int main(int argc, const char * argv[])
             NSLog(@" You have to give an argument - if not starting in first location");
             [ToolsForTextGame WriteMarkers:NR_OF_MARKERS];
             starting_nsu = 1;
+            loc_main_func.location_number = [NSNumber numberWithInt:starting_nsu];
         }
         else
         {
@@ -455,7 +456,7 @@ int main(int argc, const char * argv[])
         [loc_main_func ShowDescription:[NSNumber numberWithInteger:starting_nsu]];
         
         //NSLog(@"%@",[[loc_main_func.LocationClassInstancesArray objectAtIndex:starting_nsu] LocationDescription]);
-        mutableArrayExits = [loc_main_func findExits:loc_main_func.location_number];
+        mutableArrayExits = [loc_main_func findExits:[NSNumber numberWithInteger:starting_nsu]];
         
         NSScanner *mainScanner;
         NSString *word = @"";
@@ -476,7 +477,7 @@ int main(int argc, const char * argv[])
             }
             else if ([word containsString:@"location"])
             {
-                [loc_main_func ShowDescription];
+                [loc_main_func ShowDescription:loc_main_func.location_number];
                 //NSLog([[LocationObjectsArray objectAtIndex:[loc_main_func.location_number integerValue]] LocationDescription]);
             }
             

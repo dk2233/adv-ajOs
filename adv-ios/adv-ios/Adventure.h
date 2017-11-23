@@ -15,7 +15,7 @@
 
 
 
-
+extern void initializeGame(void);
 
 #define ADV_FILE_WITH_DATA  "adventure.text"
 
@@ -34,8 +34,6 @@ extern NSMutableArray       *AllItemMessage;
 extern NSMutableArray       *AllExitCommands;
 extern NSMutableArray       *AllExits;
 extern NSMutableArray       *AllLocationDescription;
-
-
 
 @interface TextGameFunctions : NSObject
 //actual location number

@@ -23,7 +23,7 @@
 #import     <Foundation/Foundation.h>
 #include    "stdlib.h"
 #import     "Adventure.h"
-
+#import     "Game_Types.h"
 
 
 //NSNumber            *nr_of_treasure;
@@ -44,8 +44,8 @@ NSMutableArray      *AllExits;
  
  */
 
-
-
+TextGameFunctions *loc_main_func ;
+ToolsForTextGame *ToolsForTexts;
 
 
 
@@ -394,7 +394,7 @@ NSMutableArray      *AllExits;
 int main(int argc, const char * argv[])
 {
     NSInteger nr_int;
-    NSUInteger  var_i;
+    //NSUInteger  var_i;
     NSUInteger  starting_nsu;
     NSMutableArray  *mutableArrayExits;
     
@@ -407,9 +407,9 @@ int main(int argc, const char * argv[])
          */
         
         //functions - super class
-        TextGameFunctions *loc_main_func = [[TextGameFunctions alloc] initSuper];
+        loc_main_func = [[TextGameFunctions alloc] initSuper];
         //tools
-        ToolsForTextGame *ToolsForTexts = [[ToolsForTextGame alloc] initGame];
+        ToolsForTexts = [[ToolsForTextGame alloc] initGame];
         
         //[loc_main_func ShowAllData:AllItemsLocation ];
         
@@ -434,27 +434,13 @@ int main(int argc, const char * argv[])
         }
         
         
-        NSMutableArray *AllLocationDescription = [ToolsForTexts findAllLocationDescription:ToolsForTexts.AllDataFromFile];
         
         
+        initializeGame();
         
-        //NumberOfLocation = [AllExitsTable count];
-        NSLog(@"Number of location %lu",(unsigned long)ToolsForTexts.NumberOfLocation);
-        //here i put a loop to create class instances for all location
-        //loc_main_func.LocationClassInstancesArray = [[NSMutableArray alloc] init];
-        for(var_i = RESET; var_i < ToolsForTexts.NumberOfLocation; var_i++)
-        {
-            LocationItems *loc_item = [LocationItems alloc];
-            
-            loc_item.LocationDescription =[AllLocationDescription objectAtIndex:var_i];
-            loc_item.ExitsForLocation = [AllExitsTable objectAtIndex:var_i];
-            [loc_main_func.LocationClassInstancesArray addObject: loc_item];
-            //[loc_item release];
-            //NSLog([[loc_main_func.LocationClassInstancesArray lastObject] LocationDescription] );
-        }
         
         [loc_main_func ShowDescription:[NSNumber numberWithInteger:starting_nsu]];
-        
+                
         //NSLog(@"%@",[[loc_main_func.LocationClassInstancesArray objectAtIndex:starting_nsu] LocationDescription]);
         mutableArrayExits = [loc_main_func findExits:[NSNumber numberWithInteger:starting_nsu]];
         

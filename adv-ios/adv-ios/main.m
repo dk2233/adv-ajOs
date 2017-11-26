@@ -62,6 +62,15 @@ ToolsForTextGame *ToolsForTexts;
 }
 @end
 
+@implementation  GameObjects
+
+-(id)init
+{
+    
+    self.PropOfObject = INIT_PropOfObject;
+    return self;
+}
+@end
 
 
 

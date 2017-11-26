@@ -24,7 +24,7 @@
 }
 
 
-
+//obsolete
 -(NSString *)findLocationDescription:(NSString *)StringWithAllData
 {
     //NSString *description;

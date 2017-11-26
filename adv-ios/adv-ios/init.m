@@ -12,6 +12,7 @@
 
 
 NSMutableArray       *AllLocationDescription;
+NSMutableArray  *AllItemObjects;
 
 /*
  * INITIALISATION
@@ -176,7 +177,7 @@ NSMutableArray       *AllLocationDescription;
 
 void initializeGame(void)
 {
-    uint8_t   var_i;
+    NSUInteger   var_i, iter;
     AllLocationDescription = [ToolsForTexts findAllLocationDescription:ToolsForTexts.AllDataFromFile];
     //NumberOfLocation = [AllExitsTable count];
     NSLog(@"Number of location %lu",(unsigned long)ToolsForTexts.NumberOfLocation);
@@ -193,6 +194,37 @@ void initializeGame(void)
         //NSLog([[loc_main_func.LocationClassInstancesArray lastObject] LocationDescription] );
     }
     
+    NSMutableArray *AllItemObjects_Array = [[NSMutableArray alloc] init];
     
+    for(var_i = RESET; var_i < AllItemMessage.count; var_i++)
+    {
+        GameObjects *objects_instance = [GameObjects alloc];
+        
+        for( iter = RESET; iter < [[AllItemMessage objectAtIndex:var_i] count]; iter++)
+        {
+            [objects_instance.ObjectDescription addObject:[AllItemMessage objectAtIndex:iter]];
+        }
+    }
+    
+
+}
+
+
+void initializeDwarfs(void)
+{
+    
+    /*  INITIALISE THE DWARVES.  DLOC IS LOC OF DWARVES, HARD-WIRED IN.  ODLOC IS
+     *  PRIOR LOC OF EACH DWARF, INITIALLY GARBAGE.  DALTLC IS ALTERNATE INITIAL LOC
+     *  FOR DWARF, IN CASE ONE OF THEM STARTS OUT ON TOP OF THE ADVENTURER.  (NO 2
+     *  OF THE 5 INITIAL LOCS ARE ADJACENT.)  DSEEN IS TRUE IF DWARF HAS SEEN HIM.
+     *  DFLAG CONTROLS THE LEVEL OF ACTIVATION OF ALL THIS:
+     *	0	NO DWARF STUFF YET (WAIT UNTIL REACHES HALL OF MISTS)
+     *	1	REACHED HALL OF MISTS, BUT HASN'T MET FIRST DWARF
+     *	2	MET FIRST DWARF, OTHERS START MOVING, NO KNIVES THROWN YET
+     *	3	A KNIFE HAS BEEN THROWN (FIRST SET ALWAYS MISSES)
+     *	3+	DWARVES ARE MAD (INCREASES THEIR ACCURACY)
+     *  SIXTH DWARF IS SPECIAL (THE PIRATE).  HE ALWAYS STARTS AT HIS CHEST'S
+     *  EVENTUAL LOCATION INSIDE THE MAZE.  THIS LOC IS SAVED IN CHLOC FOR REF.
+     *  THE DEAD END IN THE OTHER MAZE HAS ITS LOC STORED IN CHLOC2. */
 
 }

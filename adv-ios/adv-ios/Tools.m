@@ -70,6 +70,7 @@ NSMutableArray          *AllExitCommands;
         oneLineScanner = [NSScanner scannerWithString:oneLine];
         [oneLineScanner scanInteger:&temp];
         [oneLineScanner scanUpToString:@"\n" intoString:&text_desc];
+        text_desc = [text_desc stringByAppendingString:@" "];
         if (temp == nr)
         {
             if (text_desc != NULL)
@@ -78,14 +79,11 @@ NSMutableArray          *AllExitCommands;
                 temp_string = [array_descriptions.lastObject stringByAppendingString:text_desc];
                 [array_descriptions replaceObjectAtIndex:(array_descriptions.count-1U)  withObject:temp_string];
             }
-            
-            
         }
         else
         {
             [array_descriptions addObject:text_desc];
             nr++;
-
         }
         
         //NSLog(@" %d -> %@",temp,oneLine);
@@ -209,7 +207,6 @@ NSMutableArray          *AllExitCommands;
                     {
                         //value = temp /1000 ;
                         //NSLog(@"%@",oneLine);
-                        
                         
                         if ([AllItems.lastObject count] > 0U)
                         {

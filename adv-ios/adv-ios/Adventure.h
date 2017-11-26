@@ -19,6 +19,9 @@ extern void initializeGame(void);
 
 #define ADV_FILE_WITH_DATA  "adventure.text"
 
+
+#define INIT_PropOfObject -1
+
 /////////////////////////////////////////////////////////////////
 // Exported Tables
 /////////////////////////////////////////////////////////////////
@@ -34,6 +37,16 @@ extern NSMutableArray       *AllItemMessage;
 extern NSMutableArray       *AllExitCommands;
 extern NSMutableArray       *AllExits;
 extern NSMutableArray       *AllLocationDescription;
+extern NSMutableArray       *AllItemObjects_Array;
+
+
+
+
+
+
+
+
+
 
 @interface TextGameFunctions : NSObject
 //actual location number
@@ -43,7 +56,6 @@ extern NSMutableArray       *AllLocationDescription;
 //all exits for location number
 //all data exit for location number
 @property NSMutableArray *DataForExitsForLocation;
-
 @property NSMutableArray *LocationClassInstancesArray;
 
 -(id)initSuper;
@@ -59,7 +71,6 @@ extern NSMutableArray       *AllLocationDescription;
 -(NSMutableArray *)CheckAllExitsCommandForLocation;
 
 @end
-
 
 
 @interface LocationItems: TextGameFunctions
@@ -78,6 +89,16 @@ extern NSMutableArray       *AllLocationDescription;
 -(id)init;
 
 @end
+
+
+
+
+
+
+
+
+
+
 
 @interface ToolsForTextGame : NSObject
 
@@ -105,6 +126,34 @@ extern NSMutableArray       *AllLocationDescription;
 //MovingMethodFromOtherClass:(SEL)WhenIWantMoving;
 
 @end
+
+
+
+
+
+
+
+
+@interface GameObjects: NSObject
+// it is the class for one object properties, location, if it was taken,
+// if it was used or destroyed
+//LOC
+@property NSUInteger LocationOfObject;
+//adequte to PROP[]
+@property NSInteger PropOfObject;
+//it is PTEXT[]
+@property  NSMutableArray* ObjectDescription;
+
+
+@end
+
+
+
+
+
+
+
+
 
 /////////////////////////////////////////////////////////////////
 // Exported   symbol defintions

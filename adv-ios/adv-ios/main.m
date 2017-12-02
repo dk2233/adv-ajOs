@@ -66,7 +66,7 @@ ToolsForTextGame *ToolsForTexts;
 
 -(id)init
 {
-    
+    self.ObjectDescription = [[NSMutableArray alloc] init ];
     self.PropOfObject = INIT_PropOfObject;
     return self;
 }

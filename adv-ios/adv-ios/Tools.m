@@ -103,7 +103,7 @@ NSMutableArray          *AllExitCommands;
     NSInteger temp;
     uint8_t stateOfSearching = 0U;
     NSString *message;
-    
+    NSMutableArray *actual_object;
     while(![scanner isAtEnd])
     {
         //first find -1 in next line 4
@@ -129,20 +129,25 @@ NSMutableArray          *AllExitCommands;
                 
                 [oneLineScanner scanInteger:&temp];
                 
-                if ((temp<100) && (temp != 0U))
+                if ((temp<100) && (temp > 0U))
                 {
                 /* if there is a new object found I have to initialize new NSMutableArray
                  */
                     [AllItemMessage addObject:[[ NSMutableArray alloc] init]];
                 }
                 
+                actual_object = [ AllItemMessage lastObject];
+                                 
                 //NSLog(@"%@",oneLine);
-                
+                //adding new row to array
+                [actual_object addObject:[[ NSMutableArray alloc] init]];
                 [oneLineScanner scanUpToString:@"\n" intoString:&message];
                 
-                [AllItemMessage.lastObject addObject:[NSNumber numberWithInteger:temp]];
-                [AllItemMessage.lastObject addObject:message];
-                
+                [[actual_object lastObject] addObject:[NSNumber numberWithInteger:temp]];
+                //NSLog(@"%@",[AllItemMessage lastObject]);
+                [[actual_object lastObject] addObject:message];
+                //NSLog(@"%@",[AllItemMessage lastObject]);
+            
             }
             
             if (1 == stateOfSearching )

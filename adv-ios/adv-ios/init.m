@@ -178,6 +178,7 @@ NSMutableArray  *AllItemObjects;
 void initializeGame(void)
 {
     NSUInteger   var_i, iter;
+    NSString *temp;
     AllLocationDescription = [ToolsForTexts findAllLocationDescription:ToolsForTexts.AllDataFromFile];
     //NumberOfLocation = [AllExitsTable count];
     NSLog(@"Number of location %lu",(unsigned long)ToolsForTexts.NumberOfLocation);
@@ -191,18 +192,39 @@ void initializeGame(void)
         loc_item.ExitsForLocation = [AllExitsTable objectAtIndex:var_i];
         [LocationFunctions.LocationClassInstancesArray addObject: loc_item];
         //[loc_item release];
-        //NSLog([[loc_main_func.LocationClassInstancesArray lastObject] LocationDescription] );
+        //NSLog([[LocationFunctions.LocationClassInstancesArray lastObject] LocationDescription] );
+        //NSLog([[LocationFunctions.LocationClassInstancesArray objectAtIndex:var_i] LocationDescription] );
     }
     
     NSMutableArray *AllItemObjects_Array = [[NSMutableArray alloc] init];
     
     for(var_i = RESET; var_i < AllItemMessage.count; var_i++)
     {
-        GameObjects *objects_instance = [GameObjects alloc];
-        
+//        if ([[AllItemMessage objectAtIndex:var_i] count] == 0)
+//        {
+//            continue;
+//        }
+        GameObjects *objects_instance = [[GameObjects alloc] init] ;
+        //objects_instance.ObjectDescription = [[NSMutableArray alloc] init ];
+        //NSLog(@"info %@",[AllItemMessage objectAtIndex:var_i]);
+        //NSLog(@" number of objects %ld ",[[AllItemMessage objectAtIndex:var_i] count]);
         for( iter = RESET; iter < [[AllItemMessage objectAtIndex:var_i] count]; iter++)
         {
-            [objects_instance.ObjectDescription addObject:[AllItemMessage objectAtIndex:iter]];
+         
+            temp =[[AllItemMessage objectAtIndex:var_i] objectAtIndex:iter ];
+            
+            [[objects_instance ObjectDescription] addObject:temp];
+            //NSLog(@"added : %@",[objects_instance.ObjectDescription lastObject]);
+            
+        }
+        
+        [AllItemObjects_Array addObject:objects_instance];
+        
+        //NSLog(@"how many %ld",[[[AllItemObjects_Array objectAtIndex:var_i] ObjectDescription] count] );
+        //NSLog(@"how many %ld",[objects_instance.ObjectDescription count]);
+        if (0 != [[[AllItemObjects_Array objectAtIndex:var_i] ObjectDescription] count])
+        {
+            //NSLog(@"test %@",[[AllItemObjects_Array objectAtIndex:var_i] ObjectDescription]);
         }
     }
     

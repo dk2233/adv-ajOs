@@ -113,7 +113,7 @@ ShowDescription: NULL;
                 //NSLog(@"%d",item_id);
                 //NSLog(@"%@ object nr %ld",array,a);
                 
-                NSLog(@"%@",[[AllItemMessage objectAtIndex:item_id] objectAtIndex:1]);
+                NSLog(@"%@",[[[AllItemMessage objectAtIndex:item_id] objectAtIndex:0] objectAtIndex:1]);
                 
             }
         }

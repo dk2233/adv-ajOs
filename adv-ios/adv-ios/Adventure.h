@@ -58,6 +58,8 @@ extern NSMutableArray       *AllItemObjects_Array;
 @property NSMutableArray *DataForExitsForLocation;
 @property NSMutableArray *LocationClassInstancesArray;
 
+-(NSUInteger )SetBitInVar:(NSUInteger)bit_nr var:(NSUInteger)value;
+
 -(id)initSuper;
 -(NSMutableArray *)findExits:(NSNumber *)locNumberToFindExits;
 -(NSString *)findLocationDescription:(NSString *)StringWithAllData;
@@ -69,6 +71,7 @@ extern NSMutableArray       *AllItemObjects_Array;
 -(void)ShowAllExitData;
 //: (NSMutableArray *)ExitsForLocation;
 -(NSMutableArray *)CheckAllExitsCommandForLocation;
+-(NSUInteger)findConditionForLocation:(NSUInteger) Loc fromAllData:(NSString *)StringWithAllData;
 
 @end
 
@@ -82,6 +85,9 @@ extern NSMutableArray       *AllItemObjects_Array;
 @property NSString  *LocationDescription;
 @property NSMutableArray *ItemsInActualLocation;
 @property NSMutableArray *Persons;
+
+@property NSUInteger LocationConditions;
+
 
 //@property
 
@@ -144,7 +150,7 @@ extern NSMutableArray       *AllItemObjects_Array;
 //it is PTEXT[]
 @property  NSMutableArray* ObjectDescription;
 
-
+@property  boolean_t IsObjectMoveable;
 @end
 
 
@@ -163,11 +169,14 @@ extern NSMutableArray       *AllItemObjects_Array;
 
 #define  ITEMS_MESSAGES_IN_DATA_FILE            @"5"
 #define  ITEMS_LOCATION_IN_DATA_FILE            @"7"
+#define  LOCATION_CONDITION_IN_DATA             @"9"
 
 
 #define  DESTINATION_NUMBER_IN_FILES        1U
 #define  TAB_NR_DESTINATION                 1U
 #define  RESET                              0U
 #define  NR_OF_MARKERS                      30U
+
+#define  NO_LIGHT_IN_LOCATION               1
 
 #endif /* Adventure_h */

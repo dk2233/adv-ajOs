@@ -24,6 +24,14 @@
 }
 
 
+-(NSUInteger )SetBitInVar:(NSUInteger)bit_nr var:(NSUInteger)value
+{
+    NSUInteger temp, bit_set=1;
+    temp = bit_set << bit_nr;
+    
+    return value || temp;
+}
+
 //obsolete
 -(NSString *)findLocationDescription:(NSString *)StringWithAllData
 {
@@ -81,6 +89,8 @@ ShowDescription: NULL;
 -(void)ShowDescription: (NSNumber *)loc_nr
 {
     NSInteger nr_searched;
+    NSUInteger condition;
+    uint8_t i;
     if (NULL == loc_nr)
     {
         nr_searched = [_location_number integerValue];
@@ -91,8 +101,18 @@ ShowDescription: NULL;
     }
     //printf("nr searched %d \n\n",nr_searched);
     
-    NSLog(@"%@",[[self.LocationClassInstancesArray objectAtIndex:nr_searched] LocationDescription]);
+    condition = [[self.LocationClassInstancesArray  objectAtIndex:nr_searched] LocationConditions];
     
+    
+    
+    if (NO_LIGHT_IN_LOCATION & condition)
+    {
+        NSLog(@"%@",[[self.LocationClassInstancesArray objectAtIndex:nr_searched] LocationDescription]);
+    }
+    else
+    {
+        printf("\n THere is no Light \n");
+    }
     uint8_t item_id=0;
     //show item if in that location
     /*SECTION 7: OBJECT LOCATIONS.  EACH LINE CONTAINS AN OBJECT NUMBER AND ITS
@@ -105,7 +125,7 @@ ShowDescription: NULL;
     for( NSMutableArray *OneArray in AllItemsLocation)
     {
         
-        for(uint8_t i=0U; i<OneArray.count ; i++)
+        for(i=0U; i<OneArray.count ; i++)
         {
             
             if (nr_searched == [[OneArray objectAtIndex:i ] integerValue ] )
@@ -113,7 +133,7 @@ ShowDescription: NULL;
                 //NSLog(@"%d",item_id);
                 //NSLog(@"%@ object nr %ld",array,a);
                 
-                NSLog(@"%@",[[[AllItemMessage objectAtIndex:item_id] objectAtIndex:0] objectAtIndex:1]);
+                //NSLog(@"%@",[[[AllItemMessage objectAtIndex:item_id] objectAtIndex:0] objectAtIndex:1]);
                 
             }
         }
@@ -122,7 +142,22 @@ ShowDescription: NULL;
         item_id++;
         
     }
+    NSMutableArray *array_items = [[self.LocationClassInstancesArray  objectAtIndex:nr_searched] ItemsInActualLocation];
+    for(i=RESET; i< [array_items count]; i++)
+    {
+        
+        NSUInteger item =   [[array_items objectAtIndex:i] integerValue];
+        NSUInteger row_to_read = 0;
+        if ([[AllItemMessage objectAtIndex:item] count] >1 )
+        {
+            row_to_read = 1;
+        }
+        
+        NSLog(@"%@",[[[AllItemMessage objectAtIndex:item] objectAtIndex:row_to_read] objectAtIndex:1]  );
+    }
     
+    //conditions
+    NSLog(@"conditions %lu", (unsigned long)condition );
 }
 
 
@@ -334,5 +369,65 @@ ShowDescription: NULL;
     
     return tab;
 }
+
+
+-(NSUInteger)findConditionForLocation:(NSUInteger) Loc fromAllData:(NSString *)StringWithAllData
+{
+    //NSString *description;
+    NSScanner *scanner, *oneLineScanner;
+    scanner = [NSScanner scannerWithString:StringWithAllData];
+    //self.AllItems = [ [NSMutableArray alloc]init ];
+    
+    NSString *oneLine;
+    NSUInteger temp, bit_nr, condition=0U;
+    uint8_t stateOfSearching = 0U;
+    
+    while(![scanner isAtEnd])
+    {
+        //first find -1 in next line 4
+        
+        [scanner scanUpToString:@"-1" intoString:NULL ];
+        [scanner scanUpToString:@"\n" intoString:NULL];
+        
+        if ( [scanner  scanString:LOCATION_CONDITION_IN_DATA intoString:NULL ] )
+        {
+            while(  RESET == stateOfSearching )
+            {
+                [scanner scanUpToString:@"\n" intoString:&oneLine ];
+                oneLineScanner = [NSScanner scannerWithString:oneLine];
+                
+                if ([oneLine isEqualToString:@"-1"])
+                {
+                    stateOfSearching = 1U;
+                    break;
+                    //[oneLine ]
+                }
+                //bit nr
+                [oneLineScanner scanInteger:&bit_nr];
+                
+                //now check if there is Loc in that line for that bit
+                while( ![oneLineScanner isAtEnd]  )
+                {
+                    [oneLineScanner scanInteger:&temp];
+                    if (temp == Loc)
+                    {
+                        // i am setting that bit
+                        condition = [self SetBitInVar:temp var:condition];
+                    }
+                }
+                
+                
+            }
+            
+            if (1 == stateOfSearching )
+            {
+                break;
+            }
+        }
+    }
+    return condition;
+}
+
+
 
 @end

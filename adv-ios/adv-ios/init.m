@@ -179,17 +179,48 @@ void initializeGame(void)
 {
     NSUInteger   var_i, iter;
     NSString *temp;
+    uint8_t item_id=0;
     AllLocationDescription = [ToolsForTexts findAllLocationDescription:ToolsForTexts.AllDataFromFile];
-    //NumberOfLocation = [AllExitsTable count];
+    
     NSLog(@"Number of location %lu",(unsigned long)ToolsForTexts.NumberOfLocation);
     //here i put a loop to create class instances for all location
     //loc_main_func.LocationClassInstancesArray = [[NSMutableArray alloc] init];
     for(var_i = RESET; var_i < ToolsForTexts.NumberOfLocation; var_i++)
     {
-        LocationItems *loc_item = [LocationItems alloc];
+        LocationItems *loc_item = [[LocationItems alloc] init];
         
         loc_item.LocationDescription =[AllLocationDescription objectAtIndex:var_i];
         loc_item.ExitsForLocation = [AllExitsTable objectAtIndex:var_i];
+        [loc_item setLocationConditions:[LocationFunctions findConditionForLocation:var_i fromAllData:[ToolsForTexts AllDataFromFile]]];
+        
+        //show item if in that location
+        /*SECTION 7: OBJECT LOCATIONS.  EACH LINE CONTAINS AN OBJECT NUMBER AND ITS
+         *	INITIAL LOCATION (ZERO (OR OMITTED) IF NONE).  IF THE OBJECT IS
+         *	IMMOVABLE, THE LOCATION IS FOLLOWED BY A "-1".  IF IT HAS TWO LOCATIONS
+         *	(E.G. THE GRATE) THE FIRST LOCATION IS FOLLOWED WITH THE SECOND, AND
+         *	THE OBJECT IS ASSUMED TO BE IMMOVABLE.
+         */
+        item_id = 0U;
+        for( NSMutableArray *OneArray in AllItemsLocation)
+        {
+            
+            for(iter=0U; iter<OneArray.count ; iter++)
+            {
+                
+                if (var_i == [[OneArray objectAtIndex:iter ] integerValue ] )
+                {
+                    [loc_item.ItemsInActualLocation addObject:[NSNumber numberWithInt:item_id]];
+                    
+                    //NSLog(@"%@",[[[AllItemMessage objectAtIndex:item_id] objectAtIndex:0] objectAtIndex:1]);
+                    
+                }
+            }
+            
+            item_id++;
+            
+        }
+        
+        
         [LocationFunctions.LocationClassInstancesArray addObject: loc_item];
         //[loc_item release];
         //NSLog([[LocationFunctions.LocationClassInstancesArray lastObject] LocationDescription] );
@@ -205,9 +236,9 @@ void initializeGame(void)
 //            continue;
 //        }
         GameObjects *objects_instance = [[GameObjects alloc] init] ;
-        //objects_instance.ObjectDescription = [[NSMutableArray alloc] init ];
+        
         //NSLog(@"info %@",[AllItemMessage objectAtIndex:var_i]);
-        //NSLog(@" number of objects %ld ",[[AllItemMessage objectAtIndex:var_i] count]);
+        
         for( iter = RESET; iter < [[AllItemMessage objectAtIndex:var_i] count]; iter++)
         {
          
@@ -217,6 +248,11 @@ void initializeGame(void)
             //NSLog(@"added : %@",[objects_instance.ObjectDescription lastObject]);
             
         }
+        
+        [objects_instance setPropOfObject:0];
+        objects_instance.LocationOfObject = 0;
+        
+        
         
         [AllItemObjects_Array addObject:objects_instance];
         
@@ -228,7 +264,6 @@ void initializeGame(void)
         }
     }
     
-
 }
 
 

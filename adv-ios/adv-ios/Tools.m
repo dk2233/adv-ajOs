@@ -100,7 +100,7 @@ NSMutableArray          *AllExitCommands;
     AllItemMessage = [ [NSMutableArray alloc]init ];
     [AllItemMessage addObject:[[ NSMutableArray alloc] init]];
     NSString *oneLine;
-    NSInteger temp;
+    NSInteger temp, previous_nr;
     uint8_t stateOfSearching = 0U;
     NSString *message;
     NSMutableArray *actual_object;
@@ -128,6 +128,7 @@ NSMutableArray          *AllExitCommands;
                 }
                 
                 [oneLineScanner scanInteger:&temp];
+                [oneLineScanner scanUpToString:@"\n" intoString:&message];
                 
                 if ((temp<100) && (temp > 0U))
                 {
@@ -138,15 +139,34 @@ NSMutableArray          *AllExitCommands;
                 
                 actual_object = [ AllItemMessage lastObject];
                                  
-                //NSLog(@"%@",oneLine);
+                NSLog(@"%@",oneLine);
                 //adding new row to array
-                [actual_object addObject:[[ NSMutableArray alloc] init]];
-                [oneLineScanner scanUpToString:@"\n" intoString:&message];
                 
-                [[actual_object lastObject] addObject:[NSNumber numberWithInteger:temp]];
+                //if there are same number as previous
+                //only update last row
+                if (temp != previous_nr)
+                {
+                    [actual_object addObject:[[ NSMutableArray alloc] init]];
+                    
+                    [[actual_object lastObject] addObject:[NSNumber numberWithInteger:temp]];
+                    [[actual_object lastObject] addObject:message];
+                }
+                else
+                {
+                    // adding to last array to message
+                    NSString *text = [[actual_object lastObject] objectAtIndex:1 ];
+                    NSLog(@"%@",text);
+                    message = [@"\n" stringByAppendingString:message];
+                    text  = [text   stringByAppendingString:message];
+                    [[actual_object  lastObject] replaceObjectAtIndex:1 withObject:text];
+                    NSLog(@"%@",[[actual_object lastObject] objectAtIndex:1 ]);
+                }
+                
+                previous_nr = temp;
+                
                 //NSLog(@"%@",[AllItemMessage lastObject]);
-                [[actual_object lastObject] addObject:message];
-                //NSLog(@"%@",[AllItemMessage lastObject]);
+                
+                
             
             }
             
@@ -450,6 +470,10 @@ NSMutableArray          *AllExitCommands;
     }
     printf("\n");
 }
+
+
+
+
 
 
 

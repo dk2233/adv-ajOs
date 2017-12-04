@@ -60,10 +60,15 @@ extern long fRAN(long);
 #define RAN(RANGE) fRAN(RANGE)
 extern long fRNDVOC(long,long);
 #define RNDVOC(CHAR,FORCE) fRNDVOC(CHAR,FORCE)
+
+//it recognize type of error during file read
 extern void fBUG(long);
 #define BUG(NUM) fBUG(NUM)
+
+//this function is used to map line
 extern void fMAPLIN(long);
 #define MAPLIN(FIL) fMAPLIN(FIL)
+
 extern void fTYPE();
 #define TYPE() fTYPE()
 extern void fMPINIT();
@@ -75,4 +80,7 @@ extern void fDATIME(long *X,long *Y);
 extern long fIABS(long);
 #define IABS(N) fIABS(N)
 extern long fMOD(long,long);
-#define MOD(N,M) fMOD(N,M)
+
+
+
+

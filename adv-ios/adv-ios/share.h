@@ -15,6 +15,9 @@ extern long CLOSNG;
 //  CLSHNT SAYS WHETHER HE'S READ THE CLUE IN THE ENDGAME
 extern long CLSHNT;
 //*	CONDS	MIN VALUE FOR COND(LOC) IF LOC HAS ANY HINTS
+
+//array with conditions for all location
+extern long COND[];
 extern long CONDS;
 //pointer to text about classification of player
 extern long CTEXT[];
@@ -48,10 +51,15 @@ extern long PANIC;
 //property of each object, initially all has -1 when for the first time looked prop = 0
 extern long PROP[];
 
+//STEXT(N) IS SHORT DESCRIPTION OF LOCATION N
+extern long STEXT[];
+
 /*TALLY KEEPS TRACK OF HOW MANY ARE NOT YET FOUND, SO WE KNOW
 *  WHEN TO CLOSE THE CAVE. */
 extern long  TALLY;
 
+//TTEXT IS FOR  SECTION 14 infos
+extern long TTEXT[];
 //number of turns -> TALLIES HOW MANY COMMANDS HE'S GIVEN (IGNORES YES/NO)
 extern long TURNS;
 
@@ -60,7 +68,7 @@ extern long TURNS;
 extern long WZDARK;
 
 extern long CLSMAX, CLSSES,
-   COINS, COND[],  CVAL[],
+   COINS,   CVAL[],
     DOOR, DPRSSN, DRAGON,  DTOTAL, DWARF, EGGS,
    EMRALD, ENTER, ENTRNC, FIND, FISSUR, FIXD[], FOOBAR, FOOD,
    GRATE, HINT, HINTED[], HINTLC[], HINTS[][5], HNTMAX,
@@ -72,10 +80,10 @@ extern long CLSMAX, CLSSES,
    OBJTXT[],  OGRE, OIL, OLDLC2, OLDLOC, OLDOBJ, OYSTER,
     PEARL, PILLOW, PLAC[], PLANT, PLANT2,  PYRAM,
    RESER, ROD, ROD2, RTXSIZ, RUBY, RUG, SAPPH, SAVED, SAY,
-   SCORE, SECT,  SIGN, SNAKE, SPK, STEPS, STEXT[], STICK,
+   SCORE, SECT,  SIGN, SNAKE, SPK, STEPS,  STICK,
    STREAM, TABNDX, THRESH, THROW, TK[], TRAVEL[], TRIDNT,
    TRNDEX, TRNLUZ, TRNSIZ, TRNVAL[], TRNVLS, TROLL, TROLL2, TRVS,
-   TRVSIZ, TTEXT[],  URN, V1, V2, VASE, VEND, VERB,
+   TRVSIZ,  URN, V1, V2, VASE, VEND, VERB,
    VOLCAN, VRBSIZ, VRSION, WATER, WD1, WD1X, WD2, WD2X,
    ZZWORD;
 

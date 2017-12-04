@@ -49,15 +49,10 @@ ToolsForTextGame *ToolsForTexts;
 
 
 
-
-
-
-
-
-
 @implementation  LocationItems
 -(id)init
 {
+    self.ItemsInActualLocation = [[NSMutableArray alloc] init];
     return self;
 }
 @end
@@ -116,11 +111,7 @@ int main(int argc, const char * argv[])
             starting_nsu = [starting_location integerValue]-0;
         }
         
-        
-        
-        
         initializeGame();
-        
         
         [LocationFunctions ShowDescription:[NSNumber numberWithInteger:starting_nsu]];
                 

@@ -122,11 +122,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "adv-ios/init.m"
-            timestampString = "533992624.242209"
+            timestampString = "534207753.409906"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "238"
-            endingLineNumber = "238"
+            startingLineNumber = "249"
+            endingLineNumber = "249"
             landmarkName = "initializeGame()"
             landmarkType = "7">
          </BreakpointContent>
@@ -138,11 +138,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "adv-ios/init.m"
-            timestampString = "533992624.242209"
+            timestampString = "534207753.409906"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "247"
-            endingLineNumber = "247"
+            startingLineNumber = "258"
+            endingLineNumber = "258"
             landmarkName = "initializeGame()"
             landmarkType = "7">
          </BreakpointContent>
@@ -154,11 +154,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "adv-ios/Tools.m"
-            timestampString = "533597210.365061"
+            timestampString = "534207753.409906"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "118"
-            endingLineNumber = "118"
+            startingLineNumber = "190"
+            endingLineNumber = "190"
             landmarkName = "-findAllItemMessage"
             landmarkType = "5">
          </BreakpointContent>
@@ -170,11 +170,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "adv-ios/Tools.m"
-            timestampString = "534040649.374836"
+            timestampString = "534207753.409906"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "166"
-            endingLineNumber = "166"
+            startingLineNumber = "248"
+            endingLineNumber = "248"
             landmarkName = "-findAllItemMessage"
             landmarkType = "5">
          </BreakpointContent>
@@ -186,11 +186,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "adv-ios/Tools.m"
-            timestampString = "534040649.374836"
+            timestampString = "534207753.409906"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "167"
-            endingLineNumber = "167"
+            startingLineNumber = "249"
+            endingLineNumber = "249"
             landmarkName = "-findAllItemMessage"
             landmarkType = "5">
          </BreakpointContent>
@@ -202,11 +202,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "adv-ios/init.m"
-            timestampString = "533992624.242209"
+            timestampString = "534207753.409906"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "194"
-            endingLineNumber = "194"
+            startingLineNumber = "205"
+            endingLineNumber = "205"
             landmarkName = "initializeGame()"
             landmarkType = "7">
          </BreakpointContent>
@@ -218,11 +218,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "adv-ios/init.m"
-            timestampString = "533992624.242209"
+            timestampString = "534207753.409906"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "224"
-            endingLineNumber = "224"
+            startingLineNumber = "235"
+            endingLineNumber = "235"
             landmarkName = "initializeGame()"
             landmarkType = "7">
          </BreakpointContent>
@@ -234,11 +234,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "adv-ios/Functions.m"
-            timestampString = "534038162.09346"
+            timestampString = "534206762.683975"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "406"
-            endingLineNumber = "406"
+            startingLineNumber = "414"
+            endingLineNumber = "414"
             landmarkName = "-findConditionForLocation:fromAllData:"
             landmarkType = "5">
          </BreakpointContent>
@@ -250,11 +250,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "adv-ios/Functions.m"
-            timestampString = "534038162.09346"
+            timestampString = "534206762.683975"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "415"
-            endingLineNumber = "415"
+            startingLineNumber = "423"
+            endingLineNumber = "423"
             landmarkName = "-findConditionForLocation:fromAllData:"
             landmarkType = "5">
          </BreakpointContent>
@@ -266,11 +266,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "adv-ios/Functions.m"
-            timestampString = "534038162.09346"
+            timestampString = "534203686.619961"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "145"
-            endingLineNumber = "145"
+            startingLineNumber = "150"
+            endingLineNumber = "150"
             landmarkName = "-ShowDescription:"
             landmarkType = "5">
          </BreakpointContent>
@@ -282,11 +282,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "adv-ios/Functions.m"
-            timestampString = "534038162.09346"
+            timestampString = "534206762.683975"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "161"
-            endingLineNumber = "161"
+            startingLineNumber = "169"
+            endingLineNumber = "169"
             landmarkName = "-ShowDescription:"
             landmarkType = "5">
          </BreakpointContent>
@@ -298,11 +298,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "adv-ios/Tools.m"
-            timestampString = "534040286.305857"
+            timestampString = "534207753.409906"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "133"
-            endingLineNumber = "133"
+            startingLineNumber = "205"
+            endingLineNumber = "205"
             landmarkName = "-findAllItemMessage"
             landmarkType = "5">
          </BreakpointContent>
@@ -314,11 +314,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "adv-ios/Tools.m"
-            timestampString = "534040286.305857"
+            timestampString = "534207753.409906"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "157"
-            endingLineNumber = "157"
+            startingLineNumber = "239"
+            endingLineNumber = "239"
             landmarkName = "-findAllItemMessage"
             landmarkType = "5">
          </BreakpointContent>
@@ -330,12 +330,44 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "adv-ios/Tools.m"
-            timestampString = "534040820.526204"
+            timestampString = "534207753.409906"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "162"
-            endingLineNumber = "162"
+            startingLineNumber = "244"
+            endingLineNumber = "244"
             landmarkName = "-findAllItemMessage"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "adv-ios/Tools.m"
+            timestampString = "534207753.409906"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "209"
+            endingLineNumber = "209"
+            landmarkName = "-findAllItemMessage"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "adv-ios/Tools.m"
+            timestampString = "534204773.04962"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "120"
+            endingLineNumber = "120"
+            landmarkName = "-findAllShortLocationDescription:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

@@ -93,6 +93,77 @@ NSMutableArray          *AllExitCommands;
 }
 
 
+
+
+
+-(NSMutableArray *)findAllShortLocationDescription: (NSString *)BigStringData
+{
+    NSMutableArray *array_descriptions = [[NSMutableArray alloc]init];
+    
+    //initialization of
+    [array_descriptions addObject:@""];
+    //[array_descriptions addObject:@""];
+    //[[NSString alloc]init]];
+    
+    NSString  *AllDescriptions = [[NSString alloc]init];
+    NSString *oneLine;
+    NSString *text_desc;
+    //NSString *temp_string;
+    NSScanner *scanner, *oneLineScanner;
+    
+    NSInteger temp, temp2;
+    NSInteger nr = 1U;
+    
+    scanner = [NSScanner scannerWithString:BigStringData];
+    while(![scanner isAtEnd])
+    {
+        [scanner scanUpToString:@"-1" intoString:&AllDescriptions];
+        //NSLog(@"%@",AllDescriptions);
+        [scanner scanInteger:&temp];
+        [scanner scanInteger:&temp2];
+        //NSLog(@"%ld and %ld ",temp, temp2);
+        if (temp2 == SHORT_DESCRIPTION_IN_FILES)
+        {
+            break;
+        }
+    }
+    [scanner scanUpToString:@"-1" intoString:&AllDescriptions];
+    scanner = [NSScanner scannerWithString:AllDescriptions];
+    
+    while(![scanner isAtEnd])
+    {
+        //All descriptions are at start in the data file
+        [scanner scanUpToString:@"\n" intoString:&oneLine];
+        //NSLog(oneLine);
+        oneLineScanner = [NSScanner scannerWithString:oneLine];
+        [oneLineScanner scanInteger:&temp];
+        [oneLineScanner scanUpToString:@"\n" intoString:&text_desc];
+        
+        //text_desc = [text_desc stringByAppendingString:@" "];
+        
+        while(temp > nr)
+        {
+            
+            [array_descriptions addObject:@""];
+            nr++;
+            
+        }
+        
+        [array_descriptions addObject:text_desc];
+        nr++;
+        
+        //NSLog(@" %d -> %@",temp,oneLine);
+        
+    }
+    
+    
+    
+    return array_descriptions;
+}
+
+
+
+
 -(void)findAllItemMessage
 {
     NSScanner *scanner, *oneLineScanner;
@@ -100,8 +171,9 @@ NSMutableArray          *AllExitCommands;
     AllItemMessage = [ [NSMutableArray alloc]init ];
     [AllItemMessage addObject:[[ NSMutableArray alloc] init]];
     NSString *oneLine;
-    NSInteger temp, previous_nr;
+    NSInteger temp, previous_nr=0U;
     uint8_t stateOfSearching = 0U;
+    uint8_t item_nr = 0U;
     NSString *message;
     NSMutableArray *actual_object;
     while(![scanner isAtEnd])
@@ -134,12 +206,22 @@ NSMutableArray          *AllExitCommands;
                 {
                 /* if there is a new object found I have to initialize new NSMutableArray
                  */
+                    //printf(" \t \t nr %d \n",(uint8_t)temp);
                     [AllItemMessage addObject:[[ NSMutableArray alloc] init]];
+                    item_nr++;
+                    /*below code is bc some item do not have message
+                    so i need to add empty row
+                     */
+                    while (item_nr < temp)
+                    {
+                        [AllItemMessage addObject:[[ NSMutableArray alloc] init]];
+                        item_nr++;
+                    }
                 }
                 
                 actual_object = [ AllItemMessage lastObject];
                                  
-                NSLog(@"%@",oneLine);
+                //NSLog(@"%@",oneLine);
                 //adding new row to array
                 
                 //if there are same number as previous
@@ -155,11 +237,11 @@ NSMutableArray          *AllExitCommands;
                 {
                     // adding to last array to message
                     NSString *text = [[actual_object lastObject] objectAtIndex:1 ];
-                    NSLog(@"%@",text);
+                    //NSLog(@"%@",text);
                     message = [@"\n" stringByAppendingString:message];
                     text  = [text   stringByAppendingString:message];
                     [[actual_object  lastObject] replaceObjectAtIndex:1 withObject:text];
-                    NSLog(@"%@",[[actual_object lastObject] objectAtIndex:1 ]);
+                    //NSLog(@"%@",[[actual_object lastObject] objectAtIndex:1 ]);
                 }
                 
                 previous_nr = temp;

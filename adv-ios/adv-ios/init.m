@@ -11,7 +11,7 @@
 #import "Game_Types.h"
 
 
-NSMutableArray       *AllLocationDescription;
+
 NSMutableArray  *AllItemObjects;
 
 /*
@@ -177,10 +177,13 @@ NSMutableArray  *AllItemObjects;
 
 void initializeGame(void)
 {
+    NSMutableArray       *AllLocationDescription;
+    NSMutableArray       *AllShortLocationDescription;
     NSUInteger   var_i, iter;
     NSString *temp;
     uint8_t item_id=0;
     AllLocationDescription = [ToolsForTexts findAllLocationDescription:ToolsForTexts.AllDataFromFile];
+    AllShortLocationDescription = [ToolsForTexts findAllShortLocationDescription:ToolsForTexts.AllDataFromFile];
     
     NSLog(@"Number of location %lu",(unsigned long)ToolsForTexts.NumberOfLocation);
     //here i put a loop to create class instances for all location
@@ -190,6 +193,14 @@ void initializeGame(void)
         LocationItems *loc_item = [[LocationItems alloc] init];
         
         loc_item.LocationDescription =[AllLocationDescription objectAtIndex:var_i];
+        if (var_i < [AllShortLocationDescription count])
+        {
+            loc_item.LocationShortDescription =[AllShortLocationDescription objectAtIndex:var_i];
+        }
+        else
+        {
+            loc_item.LocationShortDescription = @"";
+        }
         loc_item.ExitsForLocation = [AllExitsTable objectAtIndex:var_i];
         [loc_item setLocationConditions:[LocationFunctions findConditionForLocation:var_i fromAllData:[ToolsForTexts AllDataFromFile]]];
         

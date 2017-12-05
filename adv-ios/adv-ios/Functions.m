@@ -10,6 +10,11 @@
 #import     "Adventure.h"
 
 
+
+#define DARK(DUMMY)	((!CNDBIT(LOC,0)) && (PROP[LAMP] == 0 || !HERE(LAMP)))
+
+
+
 @implementation  TextGameFunctions
 
 -(id)initSuper
@@ -121,7 +126,7 @@ ShowDescription: NULL;
      *	(E.G. THE GRATE) THE FIRST LOCATION IS FOLLOWED WITH THE SECOND, AND
      *	THE OBJECT IS ASSUMED TO BE IMMOVABLE.
      */
-    NSLog(@"%ld",nr_searched);
+    //NSLog(@"%ld",nr_searched);
     for( NSMutableArray *OneArray in AllItemsLocation)
     {
         
@@ -158,6 +163,9 @@ ShowDescription: NULL;
     
     //conditions
     NSLog(@"conditions %lu", (unsigned long)condition );
+    
+    NSLog(@"%@", [[self.LocationClassInstancesArray objectAtIndex:nr_searched] LocationShortDescription]);
+    
 }
 
 

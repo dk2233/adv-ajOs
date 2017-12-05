@@ -36,7 +36,8 @@ extern NSMutableArray       *AllItemMessage;
 //table with all commands that are for exit number
 extern NSMutableArray       *AllExitCommands;
 extern NSMutableArray       *AllExits;
-extern NSMutableArray       *AllLocationDescription;
+//extern NSMutableArray       *AllLocationDescription;
+//extern NSMutableArray       *AllShortLocationDescription;
 extern NSMutableArray       *AllItemObjects_Array;
 
 
@@ -83,6 +84,7 @@ extern NSMutableArray       *AllItemObjects_Array;
 //all data exit for location number
 @property NSMutableArray *ExitsForLocation;
 @property NSString  *LocationDescription;
+@property NSString  *LocationShortDescription;
 @property NSMutableArray *ItemsInActualLocation;
 @property NSMutableArray *Persons;
 
@@ -117,6 +119,7 @@ extern NSMutableArray       *AllItemObjects_Array;
 
 -(id)initGame;
 -(NSMutableArray *)findAllLocationDescription: (NSString *)BigStringData;
+-(NSMutableArray *)findAllShortLocationDescription: (NSString *)BigStringData;
 -(NSUInteger)FindNumberOfLocation;
 -(void)ReadDataFile;
 -(void)findAllExitTable;
@@ -164,6 +167,7 @@ extern NSMutableArray       *AllItemObjects_Array;
 /////////////////////////////////////////////////////////////////
 // Exported   symbol defintions
 /////////////////////////////////////////////////////////////////
+#define  SHORT_DESCRIPTION_IN_FILES             2U
 #define  EXITS_NUMBER_IN_FILES                  @"3"
 #define  VOCABULARY_LOCATION_IN_FILES           @"4"
 

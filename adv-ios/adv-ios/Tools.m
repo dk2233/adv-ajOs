@@ -14,6 +14,7 @@ NSMutableArray          *AllItems;
 NSMutableArray          *AllItemsLocation;
 NSMutableArray          *AllItemMessage;
 NSMutableArray          *AllExitCommands;
+NSMutableArray          *AllActionCommands;
 
 
 @implementation ToolsForTextGame
@@ -265,7 +266,11 @@ NSMutableArray          *AllExitCommands;
     NSScanner *scannerExits, *oneLineScanner;
     scannerExits = [NSScanner scannerWithString:self.AllDataFromFile];
     AllExitCommands = [ [NSMutableArray alloc]init ];
+    AllActionCommands = [[NSMutableArray alloc] init];
+    
     AllItems = [ [NSMutableArray alloc]init ];
+    [AllActionCommands addObject:[[NSMutableArray alloc] init]];
+    
     
     NSString *oneLine;
     NSInteger temp=0U;
@@ -329,6 +334,7 @@ NSMutableArray          *AllExitCommands;
                         {
                             [AllItems addObject:[[NSMutableArray alloc] init]];
                             [AllItems.lastObject addObject:temp_string];
+                            
                         }
                         
                         
@@ -336,6 +342,24 @@ NSMutableArray          *AllExitCommands;
                         [oneLineScanner scanUpToString:@"\n" intoString:NULL];
                         
                         number_of_item_previous = temp;
+                    }
+                    //this is for all commands
+                    else if (2 == (temp / 1000))
+                    {
+                        
+                        if ([AllActionCommands.lastObject count]>0)
+                        {
+                            if ([[AllActionCommands.lastObject objectAtIndex:0] integerValue] != temp)
+                            {
+                                
+                                [AllActionCommands addObject:[[NSMutableArray alloc] init] ];
+                                [AllActionCommands.lastObject addObject:[NSNumber numberWithInteger:temp]];
+                                [AllActionCommands.lastObject addObject:[NSNumber numberWithInteger:temp]];
+                                
+                            }
+                            //[AllActionCommands.lastObject objectAtIndex:1]
+                            
+                        }
                     }
                     else
                     {

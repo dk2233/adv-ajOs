@@ -3,12 +3,14 @@
 extern long ABB[];
 //AND FIXD ARRAYS ARE USED TO SET UP ATAB[] AS THE FIRST
 //*  OBJECT AT LOCATION N
+//keep all action words
 extern long ATAB[];
-
+//keep all keys - number that are for specific action word
+extern long KTAB[];
 extern long   ATLOC[];
 
 extern long BLKLIN,  FIXED[], HOLDNG,
-		KTAB[], *LINES_ADV, LINK[], LNLENG, LNPOSN,
+		 *LINES_ADV, LINK[], LNLENG, LNPOSN,
 		PARMS[], PLACE[], TABSIZ;
 extern signed char INLINE[], MAP1[], MAP2[];
 

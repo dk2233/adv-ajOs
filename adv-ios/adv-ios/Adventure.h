@@ -39,7 +39,7 @@ extern NSMutableArray       *AllExits;
 //extern NSMutableArray       *AllLocationDescription;
 //extern NSMutableArray       *AllShortLocationDescription;
 extern NSMutableArray       *AllItemObjects_Array;
-
+extern NSMutableArray   *AllActionCommands;
 
 
 

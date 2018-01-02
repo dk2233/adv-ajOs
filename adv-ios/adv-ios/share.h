@@ -47,6 +47,8 @@ extern long NOVICE;
 extern long ODLOC[];
 //*  PANIC SAYS WHETHER HE'S FOUND OUT HE'S TRAPPED IN THE CAVE
 extern long PANIC;
+// starting location of objects
+extern long PLAC[];
 
 //property of each object, initially all has -1 when for the first time looked prop = 0
 extern long PROP[];
@@ -78,7 +80,7 @@ extern long CLSMAX, CLSSES,
    MAGZIN, MAXDIE, MAXTRS, MESH, MESSAG, MIRROR, MXSCOR,
    NEWLOC, NUGGET, NUL, NUMDIE, OBJ, OBJSND[],
    OBJTXT[],  OGRE, OIL, OLDLC2, OLDLOC, OLDOBJ, OYSTER,
-    PEARL, PILLOW, PLAC[], PLANT, PLANT2,  PYRAM,
+    PEARL, PILLOW,  PLANT, PLANT2,  PYRAM,
    RESER, ROD, ROD2, RTXSIZ, RUBY, RUG, SAPPH, SAVED, SAY,
    SCORE, SECT,  SIGN, SNAKE, SPK, STEPS,  STICK,
    STREAM, TABNDX, THRESH, THROW, TK[], TRAVEL[], TRIDNT,

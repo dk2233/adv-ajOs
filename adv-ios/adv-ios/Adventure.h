@@ -77,6 +77,11 @@ extern NSMutableArray   *AllActionCommands;
 @end
 
 
+
+
+
+
+
 @interface LocationItems: TextGameFunctions
 
 //@property NSNumber *location_number;
@@ -148,6 +153,8 @@ extern NSMutableArray   *AllActionCommands;
 // if it was used or destroyed
 //LOC
 @property NSUInteger LocationOfObject;
+//PLAC - it is initial location of objects
+@property NSUInteger InitialLocation_PLAC;
 //adequte to PROP[]
 @property NSInteger PropOfObject;
 //it is PTEXT[]

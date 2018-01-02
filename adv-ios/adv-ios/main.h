@@ -7,11 +7,17 @@ extern long ABB[];
 extern long ATAB[];
 //keep all keys - number that are for specific action word
 extern long KTAB[];
+// on the initialization FIXED[] and PLAC[] are used to set up all objects
+// this holds all objects for all locations
 extern long   ATLOC[];
 
-extern long BLKLIN,  FIXED[], HOLDNG,
+extern long PLACE[];
+//this array holds info about immovable objects
+extern long FIXED[];
+
+extern long BLKLIN,   HOLDNG,
 		 *LINES_ADV, LINK[], LNLENG, LNPOSN,
-		PARMS[], PLACE[], TABSIZ;
+		PARMS[],  TABSIZ;
 extern signed char INLINE[], MAP1[], MAP2[];
 
 //dwarf location array

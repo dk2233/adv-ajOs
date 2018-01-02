@@ -261,6 +261,12 @@ NSMutableArray          *AllActionCommands;
     }
 }
 
+
+
+
+
+
+
 -(void)findAllCommandsTable
 {
     NSScanner *scannerExits, *oneLineScanner;
@@ -269,14 +275,14 @@ NSMutableArray          *AllActionCommands;
     AllActionCommands = [[NSMutableArray alloc] init];
     
     AllItems = [ [NSMutableArray alloc]init ];
-    [AllActionCommands addObject:[[NSMutableArray alloc] init]];
+    //[AllActionCommands addObject:[[NSMutableArray alloc] init]];
     
     
     NSString *oneLine;
     NSInteger temp=0U;
     NSInteger number_of_item_previous=0U;
     NSString  *temp_string;
-    NSCharacterSet *letters = [NSCharacterSet letterCharacterSet];
+    //NSCharacterSet *letters = [NSCharacterSet letterCharacterSet];
     uint8_t stateOfSearching = 0;
     
     while(![scannerExits isAtEnd])
@@ -305,13 +311,15 @@ NSMutableArray          *AllActionCommands;
                 while(![oneLineScanner isAtEnd])
                 {
                     [oneLineScanner scanInteger:&temp];
-                    [oneLineScanner scanCharactersFromSet:letters intoString:&temp_string];
+                    //[oneLineScanner scanCharactersFromSet:letters intoString:&temp_string];
+
+                    [oneLineScanner scanUpToString:@"\n" intoString:&temp_string];
                     if (0 ==  (temp / 1000))
                     {
                         [AllExitCommands addObject:[[NSMutableArray alloc]init]];
                         [AllExitCommands.lastObject addObject:[NSNumber numberWithInteger:temp]];
                         [AllExitCommands.lastObject addObject:temp_string];
-                        [oneLineScanner scanUpToString:@"\n" intoString:NULL];
+                        
                         
                         
                     }
@@ -339,7 +347,7 @@ NSMutableArray          *AllActionCommands;
                         
                         
                         
-                        [oneLineScanner scanUpToString:@"\n" intoString:NULL];
+                        //[oneLineScanner scanUpToString:@"\n" intoString:NULL];
                         
                         number_of_item_previous = temp;
                     }
@@ -347,19 +355,16 @@ NSMutableArray          *AllActionCommands;
                     else if (2 == (temp / 1000))
                     {
                         
-                        if ([AllActionCommands.lastObject count]>0)
-                        {
-                            if ([[AllActionCommands.lastObject objectAtIndex:0] integerValue] != temp)
-                            {
-                                
-                                [AllActionCommands addObject:[[NSMutableArray alloc] init] ];
-                                [AllActionCommands.lastObject addObject:[NSNumber numberWithInteger:temp]];
-                                [AllActionCommands.lastObject addObject:[NSNumber numberWithInteger:temp]];
-                                
-                            }
-                            //[AllActionCommands.lastObject objectAtIndex:1]
-                            
-                        }
+                        
+                        
+                        [AllActionCommands addObject:[[NSMutableArray alloc] init] ];
+                        [AllActionCommands.lastObject addObject:[NSNumber numberWithInteger:(temp % 2000)]];
+                        [AllActionCommands.lastObject addObject:temp_string];
+                        
+                        
+                        //[AllActionCommands.lastObject objectAtIndex:1]
+                        
+                        
                     }
                     else
                     {
@@ -515,6 +520,31 @@ NSMutableArray          *AllActionCommands;
 
 -(void) AnalyzeCommandFromUser:(NSString *)wordFromUser  tab_of_all_commandsForOut:(NSMutableArray *)exitCommand_tab actual_location:(TextGameFunctions *)LocationActual;
 {
+    
+    
+    
+    //at first checks if word is action bc some action words can be misinterpreted by next procedure
+    //for example INFO with IN
+    for(NSMutableArray *row in AllActionCommands)
+    {
+        //NSLog(@"%@",row);
+        NSString *DefinedWord = [row objectAtIndex:1];
+        
+        if  ( [DefinedWord isKindOfClass:[NSString class] ] )
+        {
+            
+            //but it can be longer
+            if ( ( [ wordFromUser localizedCaseInsensitiveContainsString:DefinedWord]) &&
+                (DefinedWord.length >1U ) )
+            {
+                // NSLog(@"%ld", (long)DefinedWord.length);
+                NSLog(@"I know that word %@ it's number is %@",wordFromUser,[row objectAtIndex:0]);
+                return;
+            }
+        }
+        
+    }
+
      //MovingMethodFromOtherClass:(SEL)WhenIWantMoving
               //
     NSUInteger loc;
@@ -537,7 +567,7 @@ NSMutableArray          *AllActionCommands;
                 if ( ( [ wordFromUser localizedCaseInsensitiveContainsString:DefinedWord]) &&
                     (DefinedWord.length >1U ) )
                 {
-                    NSLog(@"%ld", (long)DefinedWord.length);
+                    //NSLog(@"%ld", (long)DefinedWord.length);
                     NSLog(@"%@ to == %@",DefinedWord, wordFromUser);
                     //check whether this word is in the beginning
                     loc =[wordFromUser rangeOfString:DefinedWord options:NSCaseInsensitiveSearch].location;
@@ -553,6 +583,7 @@ NSMutableArray          *AllActionCommands;
             }
         }
     }
+    
 }
 
 

@@ -8,8 +8,8 @@
 // this module holds definitions of methods for TextGameFunctions
 #import <Foundation/Foundation.h>
 #import     "Adventure.h"
-
-
+#import "Functions.h"
+#import "GameObjects.h"
 
 #define DARK(DUMMY)	((!CNDBIT(LOC,0)) && (PROP[LAMP] == 0 || !HERE(LAMP)))
 
@@ -159,6 +159,10 @@ ShowDescription: NULL;
         }
         
         NSLog(@"%@",[[[AllItemMessage objectAtIndex:item] objectAtIndex:row_to_read] objectAtIndex:1]  );
+        if (TRUE == [[AllItemObjects_Array objectAtIndex:item] IsObjectMoveable])
+        {
+            NSLog(@"Object is immovable");
+        }
     }
     
     //conditions

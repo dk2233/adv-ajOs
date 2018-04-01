@@ -39,6 +39,9 @@
 		65883A651FC1973F0026FC6B /* init.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = init.m; sourceTree = "<group>"; };
 		65883A671FC7619E0026FC6B /* Game_Types.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Game_Types.h; sourceTree = "<group>"; };
 		65883A681FC9EAF60026FC6B /* Functions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Functions.m; sourceTree = "<group>"; };
+		E713975C2070D6C4003E5E17 /* Functions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Functions.h; sourceTree = "<group>"; };
+		E713975D2070D71D003E5E17 /* GameObjects.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameObjects.h; sourceTree = "<group>"; };
+		E713975E2070D842003E5E17 /* Protocols.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Protocols.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,17 +74,20 @@
 		6523DF0C1F07BCD60082E6A9 /* adv-ios */ = {
 			isa = PBXGroup;
 			children = (
-				6523DF0D1F07BCD60082E6A9 /* main.m */,
-				65883A681FC9EAF60026FC6B /* Functions.m */,
-				65883A651FC1973F0026FC6B /* init.m */,
-				65191BCD1F51DD3D000CF1BE /* Tools.m */,
-				65883A671FC7619E0026FC6B /* Game_Types.h */,
-				65191BCB1F50CF00000CF1BE /* misc.c */,
-				65191BC51F50BB2D000CF1BE /* main.h */,
-				65191BC61F50BB41000CF1BE /* misc.h */,
-				65191BC71F50BC47000CF1BE /* funcs.h */,
-				65191BC81F50BCCE000CF1BE /* share.h */,
 				652B86941F3E2DDC00EF4316 /* Adventure.h */,
+				65191BC71F50BC47000CF1BE /* funcs.h */,
+				E713975C2070D6C4003E5E17 /* Functions.h */,
+				65883A681FC9EAF60026FC6B /* Functions.m */,
+				65883A671FC7619E0026FC6B /* Game_Types.h */,
+				E713975D2070D71D003E5E17 /* GameObjects.h */,
+				65883A651FC1973F0026FC6B /* init.m */,
+				65191BC51F50BB2D000CF1BE /* main.h */,
+				6523DF0D1F07BCD60082E6A9 /* main.m */,
+				65191BCB1F50CF00000CF1BE /* misc.c */,
+				65191BC61F50BB41000CF1BE /* misc.h */,
+				E713975E2070D842003E5E17 /* Protocols.h */,
+				65191BC81F50BCCE000CF1BE /* share.h */,
+				65191BCD1F51DD3D000CF1BE /* Tools.m */,
 			);
 			path = "adv-ios";
 			sourceTree = "<group>";

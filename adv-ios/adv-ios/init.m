@@ -9,11 +9,11 @@
 #import <Foundation/Foundation.h>
 #import "Adventure.h"
 #import "Game_Types.h"
-
+#import "GameObjects.h"
 
 
 NSMutableArray  *AllItemObjects;
-
+NSMutableArray *AllItemObjects_Array;
 /*
  * INITIALISATION
  */
@@ -238,7 +238,7 @@ void initializeGame(void)
         //NSLog([[LocationFunctions.LocationClassInstancesArray objectAtIndex:var_i] LocationDescription] );
     }
     
-    NSMutableArray *AllItemObjects_Array = [[NSMutableArray alloc] init];
+    AllItemObjects_Array = [[NSMutableArray alloc] init];
     
     for(var_i = RESET; var_i < AllItemMessage.count; var_i++)
     {
@@ -257,6 +257,11 @@ void initializeGame(void)
             
             [[objects_instance ObjectDescription] addObject:temp];
             //NSLog(@"added : %@",[objects_instance.ObjectDescription lastObject]);
+            
+            if (-1 == [[[AllItemsLocation objectAtIndex:iter] lastObject] integerValue])
+            {
+                objects_instance.IsObjectMoveable = TRUE;
+            }
             
         }
         

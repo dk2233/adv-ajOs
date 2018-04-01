@@ -24,6 +24,7 @@
 #include    "stdlib.h"
 #import     "Adventure.h"
 #import     "Game_Types.h"
+#import "GameObjects.h"
 
 
 //NSNumber            *nr_of_treasure;
@@ -86,9 +87,12 @@ int main(int argc, const char * argv[])
         
         //functions - super class
         LocationFunctions = [[TextGameFunctions alloc] initSuper];
+               
         //tools
         ToolsForTexts = [[ToolsForTextGame alloc] initGame];
         
+//        [LocationFunctions setDelegate:ToolsForTexts];
+        LocationFunctions.delegate = ToolsForTexts;
         //[loc_main_func ShowAllData:AllItemsLocation ];
         
         NSLog(@" arguments %d ",argc);
@@ -129,6 +133,9 @@ int main(int argc, const char * argv[])
             //[loc1 findExits];
             //printf(">");
             word = [ToolsForTextGame WaitForCommand];
+            
+            [LocationFunctions.delegate sendActualCommand:word];
+            
             //NSLog(@"new => %@",word);
             
             if ([word containsString:@"dupa"])
@@ -146,6 +153,8 @@ int main(int argc, const char * argv[])
                 mainScanner = [NSScanner scannerWithString:word  ];
                 
                 [mainScanner scanString:@"go"  intoString:&str2];
+                
+                //[LocationFunctions.]
                 
                 [mainScanner scanInteger:&nr_int ];
                 

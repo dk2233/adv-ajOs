@@ -125,22 +125,6 @@
             timestampString = "534207753.409906"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "249"
-            endingLineNumber = "249"
-            landmarkName = "initializeGame()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "adv-ios/init.m"
-            timestampString = "534207753.409906"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
             startingLineNumber = "258"
             endingLineNumber = "258"
             landmarkName = "initializeGame()"
@@ -160,7 +144,7 @@
             startingLineNumber = "190"
             endingLineNumber = "190"
             landmarkName = "-findAllItemMessage"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -176,7 +160,7 @@
             startingLineNumber = "248"
             endingLineNumber = "248"
             landmarkName = "-findAllItemMessage"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -192,7 +176,7 @@
             startingLineNumber = "249"
             endingLineNumber = "249"
             landmarkName = "-findAllItemMessage"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -304,7 +288,7 @@
             startingLineNumber = "205"
             endingLineNumber = "205"
             landmarkName = "-findAllItemMessage"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -320,7 +304,7 @@
             startingLineNumber = "239"
             endingLineNumber = "239"
             landmarkName = "-findAllItemMessage"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -336,7 +320,7 @@
             startingLineNumber = "244"
             endingLineNumber = "244"
             landmarkName = "-findAllItemMessage"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -352,7 +336,7 @@
             startingLineNumber = "209"
             endingLineNumber = "209"
             landmarkName = "-findAllItemMessage"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -368,7 +352,7 @@
             startingLineNumber = "120"
             endingLineNumber = "120"
             landmarkName = "-findAllShortLocationDescription:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -399,8 +383,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "90"
             endingLineNumber = "90"
-            landmarkName = "main()"
-            landmarkType = "7">
+            landmarkName = "main"
+            landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

@@ -438,7 +438,11 @@ NSMutableArray          *AllActionCommands;
                     
                     [oneLineScanner scanInteger:&temp];
                     [AllItemsLocation.lastObject addObject:[NSNumber numberWithInteger:temp]];
-                    
+                    if (temp == -1)
+                    {
+                        //NSLog(@"%@",AllItemsLocation.lastObject);
+                        
+                    }
                 }
                 
             }
@@ -517,7 +521,13 @@ NSMutableArray          *AllActionCommands;
 
 
 
-
+/*--------------------------------------------------------------------------------
+*  Function
+*  for analysing command that user have given
+*  It should be big switch case
+*  with different cases for each command
+*
+--------------------------------------------------------------------------------*/
 -(void) AnalyzeCommandFromUser:(NSString *)wordFromUser  tab_of_all_commandsForOut:(NSMutableArray *)exitCommand_tab actual_location:(TextGameFunctions *)LocationActual;
 {
     
@@ -612,7 +622,10 @@ NSMutableArray          *AllActionCommands;
 
 
 
-
+-(void)sendActualCommand:(NSString *)command
+{
+    NSLog(@" command from protocol %@",command);
+}
 
 @end
 
@@ -621,12 +634,3 @@ NSMutableArray          *AllActionCommands;
 
 
 
-//
-//@implementation <#class#>
-//
-//<#methods#>
-//
-//@end GlobalValuesForLocation:NSObject
-//@property NSNumber *NumberOfLocation;
-//
-//@end
